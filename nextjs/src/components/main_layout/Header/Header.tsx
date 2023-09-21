@@ -3,10 +3,31 @@ import styles from './Header.module.css';
 import cn from 'classnames';
 import { useState } from 'react';
 
+const tools = {
+    electro: [],
+    benzo: [],
+    garden: [],
+    compressors: [],
+    generators: [],
+    welding: [],
+    heatguns: [],
+    rest: [],
+}
+
 export const Header = () => {
     const [dropMenuFlag, setDropMenuFlag] = useState(false);
     const [sideElectro, setSideElectro] = useState(false);
+    const [sideFuel, setSideFuel] = useState(false);
+    const [sideGarden, setSideGarden] = useState(false);
+    const [sideCompressors, setSideCompressors] = useState(false);
+    const [sideGenerators, setSideGenerators] = useState(false);
+    const [sideWelding, setSideWelding] = useState(false);
+    const [sideHeatguns, setSideHeatguns] = useState(false);
+    const [sideRest, setSideRest] = useState(false);
 
+    const [searchMobile, setSearchMobile] = useState(false);
+    const [searchPlaceholder, setSearchPlaceholder] = useState('');
+    const [searchFocuse, setSearchFocuse] = useState(false);
 
     const dropMenuHide = () => {
 
@@ -20,6 +41,10 @@ export const Header = () => {
 
     }
 
+    const searchTool = () => {
+
+    }
+
     return (
         <header className="header">
             <div className="header__topper">
@@ -27,9 +52,9 @@ export const Header = () => {
                 <Link className="header__adress" target="_blank" href="https://yandex.ru/maps/-/CCUEb2QElD">Наш адрес: г.Москва, МГСА
                     №256</Link>
                 <Link className="header__mob-phone" href="tel: {{contactsSettings$.phoneNumber}}">
-                    {/ {{ contactsSettings$.phoneNumber }} /}
+                    {/* {/ {{ contactsSettings$.phoneNumber }} /} */}
                 </Link>
-                {/ <app-send-request></app - send - request > /}
+                {/* {/ <app-send-request></app - send - request > /} */}
             </div>
             <nav className="header__nav nav">
                 <Link className="header__logo" href="['/']" routerLinkActive='active'>
@@ -47,7 +72,7 @@ export const Header = () => {
                                     stroke-linejoin="round" />
                             </svg>
                         </div>
-                        {dropMenuFlag && <>
+                        {dropMenuFlag &&
                             <div className="drop-menu">
                                 <div>
                                     <div
@@ -82,9 +107,9 @@ export const Header = () => {
                                         </div>}
                                     </div>
                                     <div className="{'drop-menu__item': true, 'drop-menu__item_hover': sideFuel}"
-                                        onMouseEnter="arrowRight('benzom')" onMouseLeave="sideFuel = false"
-                                        onClick="arrowRight('benzo')">
-                                        <Link className="drop-menu__link" href="['tools', 'benzo']" onClick="dropMenuHide()">
+                                        onMouseEnter={() => arrowRight('benzom')} onMouseLeave={() => setSideFuel(false)}
+                                        onClick={() => arrowRight('benzo')}>
+                                        <Link className="drop-menu__link" href="['tools', 'benzo']" onClick={() => dropMenuHide()}>
                                             Бензоинструмент
                                         </Link>
                                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
@@ -92,18 +117,23 @@ export const Header = () => {
                                             <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        <div className="side-drop-menu" ngIf="sideFuel">
-                                            <Link ngFor="let tool of this.tools.benzo.includedTypes; index as i"
-                                                href="['tools', 'benzo', this.tools.benzo.includedIds[i]]"
-                                                onClick="dropMenuHide()">
-                                                {tool}
-                                            </Link>
-                                        </div>
+                                        {sideFuel && <div className="side-drop-menu">
+                                            {tools.benzo.map((tool, i) => {
+                                                return (
+                                                    <Link
+                                                        href="['tools', 'benzo', this.tools.benzo.includedIds[i]]"
+                                                        onClick={() => dropMenuHide()}
+                                                    >
+                                                        {tool}
+                                                    </Link>
+                                                )
+                                            })}
+                                        </div>}
                                     </div>
                                     <div className="{'drop-menu__item': true, 'drop-menu__item_hover': sideGarden}"
-                                        onMouseEnter="arrowRight('gardenm')" onMouseLeave="sideGarden = false"
-                                        onClick="arrowRight('garden')">
-                                        <Link className="drop-menu__link" href="['tools', 'garden']" onClick="dropMenuHide()">
+                                        onMouseEnter={() => arrowRight('gardenm')} onMouseLeave={() => setSideGarden(false)}
+                                        onClick={() => arrowRight('garden')}>
+                                        <Link className="drop-menu__link" href="['tools', 'garden']" onClick={() => dropMenuHide()}>
                                             Садовая техника
                                         </Link>
                                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
@@ -111,18 +141,23 @@ export const Header = () => {
                                             <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        <div className="side-drop-menu" ngIf="sideGarden">
-                                            <Link ngFor="let tool of this.tools.garden.includedTypes; index as i"
-                                                href="['tools', 'garden', this.tools.garden.includedIds[i]]"
-                                                onClick="dropMenuHide()">
-                                                {tool}
-                                            </Link>
-                                        </div>
+                                        {sideGarden && <div className="side-drop-menu">
+                                            {tools.garden.map((tool, i) => {
+                                                return (
+                                                    <Link
+                                                        href="['tools', 'garden', this.tools.garden.includedIds[i]]"
+                                                        onClick={() => dropMenuHide()}
+                                                    >
+                                                        {tool}
+                                                    </Link>
+                                                )
+                                            })}
+                                        </div>}
                                     </div>
                                     <div className="{'drop-menu__item': true, 'drop-menu__item_hover': sideCompressors}"
-                                        onMouseEnter="arrowRight('compressorm')" onMouseLeave="sideCompressors = false"
-                                        onClick="arrowRight('compressor')">
-                                        <Link className="drop-menu__link" href="['tools', 'compressor']" onClick="dropMenuHide()">
+                                        onMouseEnter={() => arrowRight('compressorm')} onMouseLeave={() => setSideCompressors(false)}
+                                        onClick={() => arrowRight('compressor')}>
+                                        <Link className="drop-menu__link" href="['tools', 'compressor']" onClick={() => dropMenuHide()}>
                                             Компрессоры
                                         </Link>
                                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
@@ -130,18 +165,23 @@ export const Header = () => {
                                             <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        <div className="side-drop-menu" ngIf="sideCompressors">
-                                            <Link ngFor="let tool of this.tools.compressors.includedTypes; index as i"
-                                                href="['tools', 'compressors', this.tools.compressors.includedIds[i]]"
-                                                onClick="dropMenuHide()">
-                                                {tool}
-                                            </Link>
-                                        </div>
+                                        {sideCompressors && <div className="side-drop-menu">
+                                            {tools.compressors.map((tool, i) => {
+                                                return (
+                                                    <Link
+                                                        href="['tools', 'compressors', this.tools.compressors.includedIds[i]]"
+                                                        onClick={() => dropMenuHide()}
+                                                    >
+                                                        {tool}
+                                                    </Link>
+                                                )
+                                            })}
+                                        </div>}
                                     </div>
                                     <div className="{'drop-menu__item': true, 'drop-menu__item_hover': sideGenerators}"
-                                        onMouseEnter="arrowRight('generatorm')" onMouseLeave="sideGenerators = false"
-                                        onClick="arrowRight('generator')">
-                                        <Link className="drop-menu__link" href="['tools', 'generator']" onClick="dropMenuHide()">
+                                        onMouseEnter={() => arrowRight('generatorm')} onMouseLeave={() => setSideGenerators(false)}
+                                        onClick={() => arrowRight('generator')}>
+                                        <Link className="drop-menu__link" href="['tools', 'generator']" onClick={() => dropMenuHide()}>
                                             Генераторы
                                         </Link>
                                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
@@ -149,18 +189,23 @@ export const Header = () => {
                                             <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        <div className="side-drop-menu" ngIf="sideGenerators">
-                                            <Link ngFor="let tool of this.tools.generators.includedTypes; index as i"
-                                                href="['tools', 'generators', this.tools.generators.includedIds[i]]"
-                                                onClick="dropMenuHide()">
-                                                {tool}
-                                            </Link>
-                                        </div>
+                                        {sideGenerators && <div className="side-drop-menu">
+                                            {tools.generators.map((tool, i) => {
+                                                return (
+                                                    <Link
+                                                        href="['tools', 'generators', this.tools.generators.includedIds[i]]"
+                                                        onClick={() => dropMenuHide()}
+                                                    >
+                                                        {tool}
+                                                    </Link>
+                                                )
+                                            })}
+                                        </div>}
                                     </div>
                                     <div className="{'drop-menu__item': true, 'drop-menu__item_hover': sideWelding}"
-                                        onMouseEnter="arrowRight('weldingm')" onMouseLeave="sideWelding = false"
-                                        onClick="arrowRight('welding')">
-                                        <Link className="drop-menu__link" href="['tools', 'welding']" onClick="dropMenuHide()">
+                                        onMouseEnter={() => arrowRight('weldingm')} onMouseLeave={() => setSideWelding(false)}
+                                        onClick={() => arrowRight('welding')}>
+                                        <Link className="drop-menu__link" href="['tools', 'welding']" onClick={() => dropMenuHide()}>
                                             Сварочная техника
                                         </Link>
                                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
@@ -168,18 +213,23 @@ export const Header = () => {
                                             <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        <div className="side-drop-menu" ngIf="sideWelding">
-                                            <Link ngFor="let tool of this.tools.welding.includedTypes; index as i"
-                                                href="['tools', 'welding', this.tools.welding.includedIds[i]]"
-                                                onClick="dropMenuHide()">
-                                                {tool}
-                                            </Link>
-                                        </div>
+                                        {sideWelding && <div className="side-drop-menu">
+                                            {tools.welding.map((tool, i) => {
+                                                return (
+                                                    <Link
+                                                        href="['tools', 'welding', this.tools.welding.includedIds[i]]"
+                                                        onClick={() => dropMenuHide()}
+                                                    >
+                                                        {tool}
+                                                    </Link>
+                                                )
+                                            })}
+                                        </div>}
                                     </div>
                                     <div className="{'drop-menu__item': true, 'drop-menu__item_hover': sideHeatguns}"
-                                        onMouseEnter="arrowRight('heatgunm')" onMouseLeave="sideHeatguns = false"
-                                        onClick="arrowRight('heatgun')">
-                                        <Link className="drop-menu__link" href="['tools', 'heatgun']" onClick="dropMenuHide()">
+                                        onMouseEnter={() => arrowRight('heatgunm')} onMouseLeave={() => setSideHeatguns(false)}
+                                        onClick={() => arrowRight('heatgun')}>
+                                        <Link className="drop-menu__link" href="['tools', 'heatgun']" onClick={() => dropMenuHide()}>
                                             Тепловые пушки
                                         </Link>
                                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
@@ -187,123 +237,137 @@ export const Header = () => {
                                             <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        <div className="side-drop-menu" ngIf="sideHeatguns">
-                                            < /> !-- <div className="side-drop-menu"> -->
-                                                <Link ngFor="let tool of this.tools.heatguns.includedTypes; index as i"
-                                                    href="['tools', 'heatguns', this.tools.heatguns.includedIds[i]]"
-                                                    onClick="dropMenuHide()">
-                                                    {tool}
-                                                </Link>
-                                            </div>
-                                        </div>
-                                        <div className="{'drop-menu__item': true, 'drop-menu__item_hover': sideRest}"
-                                            onMouseEnter="arrowRight('restm')" onMouseLeave="sideRest = false"
-                                            onClick="arrowRight('rest')">
-                                            <Link className="drop-menu__link" href="['tools', 'rest']" onClick="dropMenuHide()">
-                                                Техника для отдыха
-                                            </Link>
-                                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                            <div className="side-drop-menu" ngIf="sideRest">
-                                                <Link ngFor="let tool of this.tools.rest.includedTypes; index as i"
-                                                    href="['tools', 'rest', this.tools.rest.includedIds[i]]"
-                                                    onClick="dropMenuHide()">
-                                                    {tool}
-                                                </Link>
-                                            </div>
-                                        </div>
+                                        {sideHeatguns && <div className="side-drop-menu">
+                                            {tools.heatguns.map((tool, i) => {
+                                                return (
+                                                    <Link
+                                                        href="['tools', 'heatguns', this.tools.heatguns.includedIds[i]]"
+                                                        onClick={() => dropMenuHide()}
+                                                    >
+                                                        {tool}
+                                                    </Link>
+                                                )
+                                            })}
+                                        </div>}
                                     </div>
-                                </div>}
-                            </li><li className="nav__item" routerLinkActive='active'>
-                                <Link className="nav__link" href="['delivery']">Доставка и оплата</Link>
-                            </li><li className="nav__item" routerLinkActive='active'>
-                                <Link className="nav__link" href="['contacts']">Контакты</Link>
-                            </li><li className="header__search" ngIf="!searchMobile">
-                                <form formGroup="searchForm" onInput="searchTool()">
-                                    <input formControlName="data" ngModel="this.searchForm.value.data" id="search" type="search"
-                                        placeholder={{ searchPlaceholder }} onFocus="searchFocuse = true" onBlur="searchFocuse = false">
-                                    </></form>
-                                <svg ngIf="!searchForm.value.data" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M19.9399 18.5624L13.4474 12.0699C14.4549 10.7675 14.9999 9.17496 14.9999 7.49997C14.9999 5.49498 14.2174 3.61498 12.8024 2.19749C11.3874 0.779996 9.50246 0 7.49997 0C5.49748 0 3.61248 0.782496 2.19749 2.19749C0.779996 3.61248 0 5.49498 0 7.49997C0 9.50246 0.782496 11.3874 2.19749 12.8024C3.61248 14.2199 5.49498 14.9999 7.49997 14.9999C9.17496 14.9999 10.765 14.4549 12.0674 13.4499L18.5599 19.9399C18.579 19.959 18.6016 19.9741 18.6264 19.9844C18.6513 19.9947 18.678 20 18.7049 20C18.7318 20 18.7585 19.9947 18.7834 19.9844C18.8083 19.9741 18.8309 19.959 18.8499 19.9399L19.9399 18.8524C19.959 18.8334 19.9741 18.8108 19.9844 18.7859C19.9947 18.761 20 18.7343 20 18.7074C20 18.6805 19.9947 18.6538 19.9844 18.6289C19.9741 18.6041 19.959 18.5815 19.9399 18.5624ZM11.46 11.46C10.4 12.5174 8.99496 13.0999 7.49997 13.0999C6.00497 13.0999 4.59998 12.5174 3.53998 11.46C2.48249 10.4 1.89999 8.99496 1.89999 7.49997C1.89999 6.00497 2.48249 4.59748 3.53998 3.53998C4.59998 2.48249 6.00497 1.89999 7.49997 1.89999C8.99496 1.89999 10.4025 2.47999 11.46 3.53998C12.5174 4.59998 13.0999 6.00497 13.0999 7.49997C13.0999 8.99496 12.5174 10.4025 11.46 11.46Z"
-                                        fill="#131522" />
-                                </svg>
-                                <button ngIf="!!searchForm.value.data" className="search-reset" onClick="resetSearch()">
-                                </button>
-                                <div className="side-drop-menu search-result"
-                                    ngIf="(searchFocuse || resultHover) && !!searchForm.value.data">
-                                    <app-top-preloader ngIf="searchPreloader"></app> - top - preloader >
-                                    <p ngIf="searchTypes$.length < 1">
-                                        Ничего не найдено
-                                    </p>
-                                    <h4 ngIf="types.type.length > 0"> Инструменты</h4>
-                                    <div ngFor="let type of types.type; index as i">
-                                        <Link href="['tools', types.category[i], types.id[i]]" onClick="resultHover = false"
-                                            onMouseover="resultHover = true" onMouseout="resultHover = false">
-                                            {type}
+                                    <div className="{'drop-menu__item': true, 'drop-menu__item_hover': sideRest}"
+                                        onMouseEnter={() => arrowRight('restm')} onMouseLeave={() => setSideRest(false)}
+                                        onClick={() => arrowRight('rest')}>
+                                        <Link className="drop-menu__link" href="['tools', 'rest']" onClick={() => dropMenuHide()}>
+                                            Техника для отдыха
                                         </Link>
-                                    </div>
-                                    <h4 ngIf="services.type.length > 0"> Услуги</h4>
-                                    <div ngFor="let service of services.type; index as i">
-                                        <Link href="['tools', services.category[i], services.id[i]]" onClick="resultHover = false"
-                                            onMouseover="resultHover = true" onMouseout="resultHover = false">
-                                            {service}
-                                        </Link>
+                                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                        {sideRest && <div className="side-drop-menu">
+                                            {tools.rest.map((tool, i) => {
+                                                return (
+                                                    <Link
+                                                        href="['tools', 'rest', this.tools.rest.includedIds[i]]"
+                                                        onClick={() => dropMenuHide()}
+                                                    >
+                                                        {tool}
+                                                    </Link>
+                                                )
+                                            })}
+                                        </div>}
                                     </div>
                                 </div>
-                            </li><li className="header__phone">
-                                <Link href="tel: {{contactsSettings$.phoneNumber}}">
-                                    <img src="assets/img/phone-icon.svg" alt="">
-                                        {contactsSettings$.phoneNumber}
-                                    </></Link>
-                            </li></>
-        </ul >
-                <div className="header__search" ngIf="searchMobile" >
-                    <form formGroup="searchForm" onInput="searchTool()" >
-                        <input formControlName="data" ngModel="this.searchForm.value.data" id="search" type="search"
-                            placeholder={searchPlaceholder} onFocus="searchFocuse = true; burger = false"
-                            onBlur="searchFocuse = false" >
-                    </form >
-                    <svg ngIf="!searchForm.value.data" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                        xmlns="http://www.w3.org/2000/svg" >
-                        <path
-                            d="M19.9399 18.5624L13.4474 12.0699C14.4549 10.7675 14.9999 9.17496 14.9999 7.49997C14.9999 5.49498 14.2174 3.61498 12.8024 2.19749C11.3874 0.779996 9.50246 0 7.49997 0C5.49748 0 3.61248 0.782496 2.19749 2.19749C0.779996 3.61248 0 5.49498 0 7.49997C0 9.50246 0.782496 11.3874 2.19749 12.8024C3.61248 14.2199 5.49498 14.9999 7.49997 14.9999C9.17496 14.9999 10.765 14.4549 12.0674 13.4499L18.5599 19.9399C18.579 19.959 18.6016 19.9741 18.6264 19.9844C18.6513 19.9947 18.678 20 18.7049 20C18.7318 20 18.7585 19.9947 18.7834 19.9844C18.8083 19.9741 18.8309 19.959 18.8499 19.9399L19.9399 18.8524C19.959 18.8334 19.9741 18.8108 19.9844 18.7859C19.9947 18.761 20 18.7343 20 18.7074C20 18.6805 19.9947 18.6538 19.9844 18.6289C19.9741 18.6041 19.959 18.5815 19.9399 18.5624ZM11.46 11.46C10.4 12.5174 8.99496 13.0999 7.49997 13.0999C6.00497 13.0999 4.59998 12.5174 3.53998 11.46C2.48249 10.4 1.89999 8.99496 1.89999 7.49997C1.89999 6.00497 2.48249 4.59748 3.53998 3.53998C4.59998 2.48249 6.00497 1.89999 7.49997 1.89999C8.99496 1.89999 10.4025 2.47999 11.46 3.53998C12.5174 4.59998 13.0999 6.00497 13.0999 7.49997C13.0999 8.99496 12.5174 10.4025 11.46 11.46Z"
-                            fill="#131522" />
-                    </svg >
-                    <button ngIf="!!searchForm.value.data" className="search-reset" onClick="resetSearch()" >
-                    </button >
+                            </div>
+                        }
+                    </li>
+                    <li className="nav__item" routerLinkActive='active'>
+                        <Link className="nav__link" href="['delivery']">Доставка и оплата</Link>
+                    </li>
+                    <li className="nav__item" routerLinkActive='active'>
+                        <Link className="nav__link" href="['contacts']">Контакты</Link>
+                    </li>
+                    {searchMobile && <li className="header__search">
+                        {/* <form formGroup="searchForm" onInput={() => searchTool()}> */}
+                        <form name="searchForm" onInput={() => searchTool()}>
+                            <input formControlName="data" ngModel="this.searchForm.value.data" id="search" type="search"
+                                placeholder={searchPlaceholder} onFocus={() => setSearchFocuse(true)} onBlur={() => setSearchFocuse(false)} />
+                        </form>
+                        <svg ngIf="!searchForm.value.data" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M19.9399 18.5624L13.4474 12.0699C14.4549 10.7675 14.9999 9.17496 14.9999 7.49997C14.9999 5.49498 14.2174 3.61498 12.8024 2.19749C11.3874 0.779996 9.50246 0 7.49997 0C5.49748 0 3.61248 0.782496 2.19749 2.19749C0.779996 3.61248 0 5.49498 0 7.49997C0 9.50246 0.782496 11.3874 2.19749 12.8024C3.61248 14.2199 5.49498 14.9999 7.49997 14.9999C9.17496 14.9999 10.765 14.4549 12.0674 13.4499L18.5599 19.9399C18.579 19.959 18.6016 19.9741 18.6264 19.9844C18.6513 19.9947 18.678 20 18.7049 20C18.7318 20 18.7585 19.9947 18.7834 19.9844C18.8083 19.9741 18.8309 19.959 18.8499 19.9399L19.9399 18.8524C19.959 18.8334 19.9741 18.8108 19.9844 18.7859C19.9947 18.761 20 18.7343 20 18.7074C20 18.6805 19.9947 18.6538 19.9844 18.6289C19.9741 18.6041 19.959 18.5815 19.9399 18.5624ZM11.46 11.46C10.4 12.5174 8.99496 13.0999 7.49997 13.0999C6.00497 13.0999 4.59998 12.5174 3.53998 11.46C2.48249 10.4 1.89999 8.99496 1.89999 7.49997C1.89999 6.00497 2.48249 4.59748 3.53998 3.53998C4.59998 2.48249 6.00497 1.89999 7.49997 1.89999C8.99496 1.89999 10.4025 2.47999 11.46 3.53998C12.5174 4.59998 13.0999 6.00497 13.0999 7.49997C13.0999 8.99496 12.5174 10.4025 11.46 11.46Z"
+                                fill="#131522" />
+                        </svg>
+                        <button ngIf="!!searchForm.value.data" className="search-reset" onClick="resetSearch()">
+                        </button>
+                        <div className="side-drop-menu search-result"
+                            ngIf="(searchFocuse || resultHover) && !!searchForm.value.data">
+                            <app-top-preloader ngIf="searchPreloader"></app> - top - preloader >
+                            <p ngIf="searchTypes$.length < 1">
+                                Ничего не найдено
+                            </p>
+                            <h4 ngIf="types.type.length > 0"> Инструменты</h4>
+                            <div ngFor="let type of types.type; index as i">
+                                <Link href="['tools', types.category[i], types.id[i]]" onClick="resultHover = false"
+                                    onMouseover="resultHover = true" onMouseout="resultHover = false">
+                                    {type}
+                                </Link>
+                            </div>
+                            <h4 ngIf="services.type.length > 0"> Услуги</h4>
+                            <div ngFor="let service of services.type; index as i">
+                                <Link href="['tools', services.category[i], services.id[i]]" onClick="resultHover = false"
+                                    onMouseover="resultHover = true" onMouseout="resultHover = false">
+                                    {service}
+                                </Link>
+                            </div>
+                        </div>
+                    </li>}
+                    <li className="header__phone">
+                        <Link href="tel: {{contactsSettings$.phoneNumber}}">
+                            <img src="assets/img/phone-icon.svg" alt="" />
+                            {contactsSettings$.phoneNumber}
+                        </Link>
+                    </li></>
+            </ul >
+            <div className="header__search" ngIf="searchMobile" >
+                <form formGroup="searchForm" onInput="searchTool()" >
+                    <input formControlName="data" ngModel="this.searchForm.value.data" id="search" type="search"
+                        placeholder={searchPlaceholder} onFocus="searchFocuse = true; burger = false"
+                        onBlur="searchFocuse = false" >
+                </form >
+                <svg ngIf="!searchForm.value.data" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    xmlns="http://www.w3.org/2000/svg" >
+                    <path
+                        d="M19.9399 18.5624L13.4474 12.0699C14.4549 10.7675 14.9999 9.17496 14.9999 7.49997C14.9999 5.49498 14.2174 3.61498 12.8024 2.19749C11.3874 0.779996 9.50246 0 7.49997 0C5.49748 0 3.61248 0.782496 2.19749 2.19749C0.779996 3.61248 0 5.49498 0 7.49997C0 9.50246 0.782496 11.3874 2.19749 12.8024C3.61248 14.2199 5.49498 14.9999 7.49997 14.9999C9.17496 14.9999 10.765 14.4549 12.0674 13.4499L18.5599 19.9399C18.579 19.959 18.6016 19.9741 18.6264 19.9844C18.6513 19.9947 18.678 20 18.7049 20C18.7318 20 18.7585 19.9947 18.7834 19.9844C18.8083 19.9741 18.8309 19.959 18.8499 19.9399L19.9399 18.8524C19.959 18.8334 19.9741 18.8108 19.9844 18.7859C19.9947 18.761 20 18.7343 20 18.7074C20 18.6805 19.9947 18.6538 19.9844 18.6289C19.9741 18.6041 19.959 18.5815 19.9399 18.5624ZM11.46 11.46C10.4 12.5174 8.99496 13.0999 7.49997 13.0999C6.00497 13.0999 4.59998 12.5174 3.53998 11.46C2.48249 10.4 1.89999 8.99496 1.89999 7.49997C1.89999 6.00497 2.48249 4.59748 3.53998 3.53998C4.59998 2.48249 6.00497 1.89999 7.49997 1.89999C8.99496 1.89999 10.4025 2.47999 11.46 3.53998C12.5174 4.59998 13.0999 6.00497 13.0999 7.49997C13.0999 8.99496 12.5174 10.4025 11.46 11.46Z"
+                        fill="#131522" />
+                </svg >
+                <button ngIf="!!searchForm.value.data" className="search-reset" onClick="resetSearch()" >
+                </button >
+            </div >
+            <div className="side-drop-menu search-result"
+                ngIf="(searchFocuse || resultHover) && !!searchForm.value.data && searchMobile" >
+                <p ngIf="searchTypes$.length < 1" >
+                    Ничего не найдено
+                </p >
+                <h4 ngIf="types.type.length > 0" > Инструменты</h4 >
+                <div ngFor="let type of types.type; index as i" >
+                    <Link href="['tools', types.category[i], types.id[i]]" onClick="resultHover = false"
+                        onMouseover="resultHover = true" onMouseout="resultHover = false" >
+                        {type}
+                    </Link >
                 </div >
-                <div className="side-drop-menu search-result"
-                    ngIf="(searchFocuse || resultHover) && !!searchForm.value.data && searchMobile" >
-                    {/* <app-top-preloader ngIf="searchPreloader" ></app - top - preloader > */}
-                    <p ngIf="searchTypes$.length < 1" >
-                        Ничего не найдено
-                    </p >
-                    <h4 ngIf="types.type.length > 0" > Инструменты</h4 >
-                    <div ngFor="let type of types.type; index as i" >
-                        <Link href="['tools', types.category[i], types.id[i]]" onClick="resultHover = false"
-                            onMouseover="resultHover = true" onMouseout="resultHover = false" >
-                            {type}
-                        </Link >
-                    </div >
-                    <h4 ngIf="services.type.length > 0" > Услуги</h4 >
-                    <div ngFor="let service of services.type; index as i" >
-                        <Link href="['tools', services.category[i], services.id[i]]" onClick="resultHover = false"
-                            onMouseover="resultHover = true" onMouseout="resultHover = false" >
-                            {service}
-                        </Link >
-                    </div >
+                <h4 ngIf="services.type.length > 0" > Услуги</h4 >
+                <div ngFor="let service of services.type; index as i" >
+                    <Link href="['tools', services.category[i], services.id[i]]" onClick="resultHover = false"
+                        onMouseover="resultHover = true" onMouseout="resultHover = false" >
+                        {service}
+                    </Link >
                 </div >
-                <input id="burger" type="checkbox" ngModel="burger" ngIf="searchMobile" >
-                    <label for="burger" className="header__nav_mobile" ngIf="searchMobile" >
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </label >
+            </div >
+            <input id="burger" type="checkbox" ngModel="burger" ngIf="searchMobile" >
+                <label htmlFor="burger" className="header__nav_mobile" ngIf="searchMobile" >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </label >
             </nav >
             <nav className="mobile__nav" className="{'mobile__nav_visible': burger}" ngIf="searchMobile" >
                 <Link href="['tools', 'electro']" onClick="burger = false" > Электроинструмент</Link >
