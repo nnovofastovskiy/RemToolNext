@@ -24,10 +24,15 @@ export const Header = () => {
     const [sideWelding, setSideWelding] = useState(false);
     const [sideHeatguns, setSideHeatguns] = useState(false);
     const [sideRest, setSideRest] = useState(false);
+    const [burger, setBurger] = useState(false);
+    const [resultHover, setResultHover] = useState(false);
 
     const [searchMobile, setSearchMobile] = useState(false);
     const [searchPlaceholder, setSearchPlaceholder] = useState('');
     const [searchFocuse, setSearchFocuse] = useState(false);
+
+    const [type, setType] = useState();
+    const [service, setService] = useState();
 
     const dropMenuHide = () => {
 
@@ -42,6 +47,10 @@ export const Header = () => {
     }
 
     const searchTool = () => {
+
+    }
+
+    const resetSearch = () => {
 
     }
 
@@ -303,7 +312,7 @@ export const Header = () => {
                                 d="M19.9399 18.5624L13.4474 12.0699C14.4549 10.7675 14.9999 9.17496 14.9999 7.49997C14.9999 5.49498 14.2174 3.61498 12.8024 2.19749C11.3874 0.779996 9.50246 0 7.49997 0C5.49748 0 3.61248 0.782496 2.19749 2.19749C0.779996 3.61248 0 5.49498 0 7.49997C0 9.50246 0.782496 11.3874 2.19749 12.8024C3.61248 14.2199 5.49498 14.9999 7.49997 14.9999C9.17496 14.9999 10.765 14.4549 12.0674 13.4499L18.5599 19.9399C18.579 19.959 18.6016 19.9741 18.6264 19.9844C18.6513 19.9947 18.678 20 18.7049 20C18.7318 20 18.7585 19.9947 18.7834 19.9844C18.8083 19.9741 18.8309 19.959 18.8499 19.9399L19.9399 18.8524C19.959 18.8334 19.9741 18.8108 19.9844 18.7859C19.9947 18.761 20 18.7343 20 18.7074C20 18.6805 19.9947 18.6538 19.9844 18.6289C19.9741 18.6041 19.959 18.5815 19.9399 18.5624ZM11.46 11.46C10.4 12.5174 8.99496 13.0999 7.49997 13.0999C6.00497 13.0999 4.59998 12.5174 3.53998 11.46C2.48249 10.4 1.89999 8.99496 1.89999 7.49997C1.89999 6.00497 2.48249 4.59748 3.53998 3.53998C4.59998 2.48249 6.00497 1.89999 7.49997 1.89999C8.99496 1.89999 10.4025 2.47999 11.46 3.53998C12.5174 4.59998 13.0999 6.00497 13.0999 7.49997C13.0999 8.99496 12.5174 10.4025 11.46 11.46Z"
                                 fill="#131522" />
                         </svg>
-                        <button ngIf="!!searchForm.value.data" className="search-reset" onClick="resetSearch()">
+                        <button ngIf="!!searchForm.value.data" className="search-reset" onClick={() => resetSearch()}>
                         </button>
                         <div className="side-drop-menu search-result"
                             ngIf="(searchFocuse || resultHover) && !!searchForm.value.data">
@@ -313,15 +322,15 @@ export const Header = () => {
                             </p>
                             <h4 ngIf="types.type.length > 0"> Инструменты</h4>
                             <div ngFor="let type of types.type; index as i">
-                                <Link href="['tools', types.category[i], types.id[i]]" onClick="resultHover = false"
-                                    onMouseover="resultHover = true" onMouseout="resultHover = false">
+                                <Link href="['tools', types.category[i], types.id[i]]" onClick={() => setResultHover(false)}
+                                    onMouseOver={() => setResultHover(true)} onMouseOut={() => setResultHover(false)}>
                                     {type}
                                 </Link>
                             </div>
                             <h4 ngIf="services.type.length > 0"> Услуги</h4>
                             <div ngFor="let service of services.type; index as i">
-                                <Link href="['tools', services.category[i], services.id[i]]" onClick="resultHover = false"
-                                    onMouseover="resultHover = true" onMouseout="resultHover = false">
+                                <Link href="['tools', services.category[i], services.id[i]]" onClick={() => setResultHover(false)}
+                                    onMouseOver={() => setResultHover(true)} onMouseOut={() => setResultHover(false)}>
                                     {service}
                                 </Link>
                             </div>
@@ -335,10 +344,14 @@ export const Header = () => {
                     </li>
                 </ul>
                 <div className="header__search" ngIf="searchMobile">
-                    <form formGroup="searchForm" onInput="searchTool()">
+                    <form formGroup="searchForm" onInput={() => searchTool()}>
                         <input formControlName="data" ngModel="this.searchForm.value.data" id="search" type="search"
-                            placeholder={searchPlaceholder} onFocus="searchFocuse = true; burger = false"
-                            onBlur="searchFocuse = false" />
+                            placeholder={searchPlaceholder}
+                            onFocus={() => {
+                                setSearchFocuse(true);
+                                setBurger(false);
+                            }}
+                            onBlur={() => setSearchFocuse(false)} />
                     </form>
                     <svg ngIf="!searchForm.value.data" width="20" height="20" viewBox="0 0 20 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -346,7 +359,7 @@ export const Header = () => {
                             d="M19.9399 18.5624L13.4474 12.0699C14.4549 10.7675 14.9999 9.17496 14.9999 7.49997C14.9999 5.49498 14.2174 3.61498 12.8024 2.19749C11.3874 0.779996 9.50246 0 7.49997 0C5.49748 0 3.61248 0.782496 2.19749 2.19749C0.779996 3.61248 0 5.49498 0 7.49997C0 9.50246 0.782496 11.3874 2.19749 12.8024C3.61248 14.2199 5.49498 14.9999 7.49997 14.9999C9.17496 14.9999 10.765 14.4549 12.0674 13.4499L18.5599 19.9399C18.579 19.959 18.6016 19.9741 18.6264 19.9844C18.6513 19.9947 18.678 20 18.7049 20C18.7318 20 18.7585 19.9947 18.7834 19.9844C18.8083 19.9741 18.8309 19.959 18.8499 19.9399L19.9399 18.8524C19.959 18.8334 19.9741 18.8108 19.9844 18.7859C19.9947 18.761 20 18.7343 20 18.7074C20 18.6805 19.9947 18.6538 19.9844 18.6289C19.9741 18.6041 19.959 18.5815 19.9399 18.5624ZM11.46 11.46C10.4 12.5174 8.99496 13.0999 7.49997 13.0999C6.00497 13.0999 4.59998 12.5174 3.53998 11.46C2.48249 10.4 1.89999 8.99496 1.89999 7.49997C1.89999 6.00497 2.48249 4.59748 3.53998 3.53998C4.59998 2.48249 6.00497 1.89999 7.49997 1.89999C8.99496 1.89999 10.4025 2.47999 11.46 3.53998C12.5174 4.59998 13.0999 6.00497 13.0999 7.49997C13.0999 8.99496 12.5174 10.4025 11.46 11.46Z"
                             fill="#131522" />
                     </svg>
-                    <button ngIf="!!searchForm.value.data" className="search-reset" onClick="resetSearch()">
+                    <button ngIf="!!searchForm.value.data" className="search-reset" onClick={() => resetSearch()}>
                     </button>
                 </div>
                 <div className="side-drop-menu search-result"
@@ -356,15 +369,15 @@ export const Header = () => {
                     </p>
                     <h4 ngIf="types.type.length > 0"> Инструменты</h4>
                     <div ngFor="let type of types.type; index as i">
-                        <Link href="['tools', types.category[i], types.id[i]]" onClick="resultHover = false"
-                            onMouseover="resultHover = true" onMouseout="resultHover = false">
+                        <Link href="['tools', types.category[i], types.id[i]]" onClick={() => setResultHover(false)}
+                            onMouseOver={() => setResultHover(true)} onMouseOut={() => setResultHover(false)}>
                             {type}
                         </Link>
                     </div>
                     <h4 ngIf="services.type.length > 0"> Услуги</h4>
                     <div ngFor="let service of services.type; index as i">
-                        <Link href="['tools', services.category[i], services.id[i]]" onClick="resultHover = false"
-                            onMouseover="resultHover = true" onMouseout="resultHover = false">
+                        <Link href="['tools', services.category[i], services.id[i]]" onClick={() => setResultHover(false)}
+                            onMouseOver={() => setResultHover(true)} onMouseOut={() => setResultHover(false)}>
                             {service}
                         </Link>
                     </div>
@@ -376,16 +389,16 @@ export const Header = () => {
                     <div></div>
                 </label>
             </nav><nav className="mobile__nav" className="{'mobile__nav_visible': burger}" ngIf="searchMobile">
-                <Link href="['tools', 'electro']" onClick="burger = false"> Электроинструмент</Link>
-                <Link href="['tools', 'benzo']" onClick="burger = false"> Бензоинструмент</Link>
-                <Link href="['tools', 'welding']" onClick="burger = false"> Сварочные аппараты</Link>
-                <Link href="['tools', 'generator']" onClick="burger = false"> Генераторы</Link>
-                <Link href="['tools', 'compressor']" onClick="burger = false"> Компрессоры</Link>
-                <Link href="['tools', 'rest']" onClick="burger = false"> Техника для отдыха</Link>
-                <Link href="['tools', 'garden']" onClick="burger = false"> Садовая техника</Link>
-                <Link href="['tools', 'heatgun']" onClick="burger = false"> Тепловые пушки</Link>
-                <Link href="['delivery']" onClick="burger = false"> Доставка и оплата</Link>
-                <Link href="['contacts']" onClick="burger = false"> Контакты</Link>
+                <Link href="['tools', 'electro']" onClick={() => setBurger(false)}> Электроинструмент</Link>
+                <Link href="['tools', 'benzo']" onClick={() => setBurger(false)}> Бензоинструмент</Link>
+                <Link href="['tools', 'welding']" onClick={() => setBurger(false)}> Сварочные аппараты</Link>
+                <Link href="['tools', 'generator']" onClick={() => setBurger(false)}> Генераторы</Link>
+                <Link href="['tools', 'compressor']" onClick={() => setBurger(false)}> Компрессоры</Link>
+                <Link href="['tools', 'rest']" onClick={() => setBurger(false)}> Техника для отдыха</Link>
+                <Link href="['tools', 'garden']" onClick={() => setBurger(false)}> Садовая техника</Link>
+                <Link href="['tools', 'heatgun']" onClick={() => setBurger(false)}> Тепловые пушки</Link>
+                <Link href="['delivery']" onClick={() => setBurger(false)}> Доставка и оплата</Link>
+                <Link href="['contacts']" onClick={() => setBurger(false)}> Контакты</Link>
             </nav>
 
         </header >
