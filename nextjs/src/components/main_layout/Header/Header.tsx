@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styles from './Header.module.css';
 import cn from 'classnames';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const tools = {
     electro: [],
@@ -33,6 +33,10 @@ export const Header = () => {
 
     const [type, setType] = useState();
     const [service, setService] = useState();
+
+    const [searchValue, setSearchValue] = useState('');
+
+    const searchRef = useRef<HTMLInputElement>(null);
 
     const dropMenuHide = () => {
 
@@ -66,12 +70,20 @@ export const Header = () => {
                 {/* {/ <app-send-request></app - send - request > /} */}
             </div>
             <nav className="header__nav nav">
-                <Link className="header__logo" href="['/']" routerLinkActive='active'>
+                <Link
+                    className="header__logo"
+                    href="['/']"
+                // routerLinkActive='active'
+                >
                     <img src="assets/img/header__logo.svg" alt="logo" />
                 </Link>
                 <ul>
-                    <li className="{'nav__item': true, 'nav__item_hover': dropMenuFlag}" routerLinkActive='active'
-                        onMouseEnter={() => arrowDown('h')} onMouseLeave={() => setDropMenuFlag(false)}>
+                    <li
+                        className="{'nav__item': true, 'nav__item_hover': dropMenuFlag}"
+                        // routerLinkActive='active'
+                        onMouseEnter={() => arrowDown('h')}
+                        onMouseLeave={() => setDropMenuFlag(false)}
+                    >
                         <Link className="nav__link drop" href="['tools']" onClick={() => dropMenuHide()}>
                             Инструменты
                         </Link>
@@ -294,47 +306,65 @@ export const Header = () => {
                                 </div>
                             </div>}
                     </li>
-                    <li className="nav__item" routerLinkActive='active'>
+                    <li
+                        className="nav__item"
+                    // routerLinkActive='active'
+                    >
                         <Link className="nav__link" href="['delivery']">Доставка и оплата</Link>
                     </li>
-                    <li className="nav__item" routerLinkActive='active'>
+                    <li
+                        className="nav__item"
+                    // routerLinkActive='active'
+                    >
                         <Link className="nav__link" href="['contacts']">Контакты</Link>
                     </li>
-                    {searchMobile && <li className="header__search">
+                    {!searchMobile && <li className="header__search">
                         {/* <form formGroup="searchForm" onInput={() => searchTool()}> */}
                         <form name="searchForm" onInput={() => searchTool()}>
-                            <input formControlName="data" ngModel="this.searchForm.value.data" id="search" type="search"
-                                placeholder={searchPlaceholder} onFocus={() => setSearchFocuse(true)} onBlur={() => setSearchFocuse(false)} />
+                            <input
+                                ref={searchRef}
+                                // formControlName="data"
+                                // ngModel="this.searchForm.value.data"
+                                id="search"
+                                type="search"
+                                placeholder={searchPlaceholder}
+                                onFocus={() => setSearchFocuse(true)}
+                                onBlur={() => setSearchFocuse(false)}
+                                onChange={e => setSearchValue(e.target.value)}
+                            />
                         </form>
-                        <svg ngIf="!searchForm.value.data" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                        {!searchValue && <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M19.9399 18.5624L13.4474 12.0699C14.4549 10.7675 14.9999 9.17496 14.9999 7.49997C14.9999 5.49498 14.2174 3.61498 12.8024 2.19749C11.3874 0.779996 9.50246 0 7.49997 0C5.49748 0 3.61248 0.782496 2.19749 2.19749C0.779996 3.61248 0 5.49498 0 7.49997C0 9.50246 0.782496 11.3874 2.19749 12.8024C3.61248 14.2199 5.49498 14.9999 7.49997 14.9999C9.17496 14.9999 10.765 14.4549 12.0674 13.4499L18.5599 19.9399C18.579 19.959 18.6016 19.9741 18.6264 19.9844C18.6513 19.9947 18.678 20 18.7049 20C18.7318 20 18.7585 19.9947 18.7834 19.9844C18.8083 19.9741 18.8309 19.959 18.8499 19.9399L19.9399 18.8524C19.959 18.8334 19.9741 18.8108 19.9844 18.7859C19.9947 18.761 20 18.7343 20 18.7074C20 18.6805 19.9947 18.6538 19.9844 18.6289C19.9741 18.6041 19.959 18.5815 19.9399 18.5624ZM11.46 11.46C10.4 12.5174 8.99496 13.0999 7.49997 13.0999C6.00497 13.0999 4.59998 12.5174 3.53998 11.46C2.48249 10.4 1.89999 8.99496 1.89999 7.49997C1.89999 6.00497 2.48249 4.59748 3.53998 3.53998C4.59998 2.48249 6.00497 1.89999 7.49997 1.89999C8.99496 1.89999 10.4025 2.47999 11.46 3.53998C12.5174 4.59998 13.0999 6.00497 13.0999 7.49997C13.0999 8.99496 12.5174 10.4025 11.46 11.46Z"
                                 fill="#131522" />
-                        </svg>
-                        <button ngIf="!!searchForm.value.data" className="search-reset" onClick={() => resetSearch()}>
-                        </button>
-                        <div className="side-drop-menu search-result"
-                            ngIf="(searchFocuse || resultHover) && !!searchForm.value.data">
-                            {/* <app-top-preloader ngIf="searchPreloader"></app> - top - preloader > */}
-                            <p ngIf="searchTypes$.length < 1">
-                                Ничего не найдено
-                            </p>
-                            <h4 ngIf="types.type.length > 0"> Инструменты</h4>
-                            <div ngFor="let type of types.type; index as i">
-                                <Link href="['tools', types.category[i], types.id[i]]" onClick={() => setResultHover(false)}
-                                    onMouseOver={() => setResultHover(true)} onMouseOut={() => setResultHover(false)}>
-                                    {type}
-                                </Link>
-                            </div>
-                            <h4 ngIf="services.type.length > 0"> Услуги</h4>
-                            <div ngFor="let service of services.type; index as i">
-                                <Link href="['tools', services.category[i], services.id[i]]" onClick={() => setResultHover(false)}
-                                    onMouseOver={() => setResultHover(true)} onMouseOut={() => setResultHover(false)}>
-                                    {service}
-                                </Link>
-                            </div>
-                        </div>
+                        </svg>}
+                        {!!searchValue && <button className="search-reset" onClick={() => resetSearch()}>
+                        </button>}
+                        {((searchFocuse || resultHover) && !!searchValue) &&
+                            <div
+                                className="side-drop-menu search-result"
+                            // ngIf="(searchFocuse || resultHover) && !!searchForm.value.data"
+                            >
+                                {/* <app-top-preloader ngIf="searchPreloader"></app> - top - preloader > */}
+                                <p ngIf="searchTypes$.length < 1">
+                                    Ничего не найдено
+                                </p>
+                                <h4 ngIf="types.type.length > 0"> Инструменты</h4>
+                                <div ngFor="let type of types.type; index as i">
+                                    <Link href="['tools', types.category[i], types.id[i]]" onClick={() => setResultHover(false)}
+                                        onMouseOver={() => setResultHover(true)} onMouseOut={() => setResultHover(false)}>
+                                        {type}
+                                    </Link>
+                                </div>
+                                <h4 ngIf="services.type.length > 0"> Услуги</h4>
+                                <div ngFor="let service of services.type; index as i">
+                                    <Link href="['tools', services.category[i], services.id[i]]" onClick={() => setResultHover(false)}
+                                        onMouseOver={() => setResultHover(true)} onMouseOut={() => setResultHover(false)}>
+                                        {service}
+                                    </Link>
+                                </div>
+                            </div>}
                     </li>}
                     <li className="header__phone">
                         <Link href="tel: {{contactsSettings$.phoneNumber}}">
@@ -343,9 +373,10 @@ export const Header = () => {
                         </Link>
                     </li>
                 </ul>
-                <div className="header__search" ngIf="searchMobile">
+                {/* MOBILE SEARCH START */}
+                {searchMobile && <div className="header__search">
                     <form formGroup="searchForm" onInput={() => searchTool()}>
-                        <input formControlName="data" ngModel="this.searchForm.value.data" id="search" type="search"
+                        <input ref={searchRef} formControlName="data" ngModel="this.searchForm.value.data" id="search" type="search"
                             placeholder={searchPlaceholder}
                             onFocus={() => {
                                 setSearchFocuse(true);
@@ -361,7 +392,9 @@ export const Header = () => {
                     </svg>
                     <button ngIf="!!searchForm.value.data" className="search-reset" onClick={() => resetSearch()}>
                     </button>
-                </div>
+                </div>}
+                {/* MOBILE SEARCH END */}
+
                 <div className="side-drop-menu search-result"
                     ngIf="(searchFocuse || resultHover) && !!searchForm.value.data && searchMobile">
                     <p ngIf="searchTypes$.length < 1">
@@ -382,24 +415,30 @@ export const Header = () => {
                         </Link>
                     </div>
                 </div>
-                <input id="burger" type="checkbox" ngModel="burger" ngIf="searchMobile" />
-                <label htmlFor="burger" className="header__nav_mobile" ngIf="searchMobile">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </label>
-            </nav><nav className="mobile__nav" className="{'mobile__nav_visible': burger}" ngIf="searchMobile">
-                <Link href="['tools', 'electro']" onClick={() => setBurger(false)}> Электроинструмент</Link>
-                <Link href="['tools', 'benzo']" onClick={() => setBurger(false)}> Бензоинструмент</Link>
-                <Link href="['tools', 'welding']" onClick={() => setBurger(false)}> Сварочные аппараты</Link>
-                <Link href="['tools', 'generator']" onClick={() => setBurger(false)}> Генераторы</Link>
-                <Link href="['tools', 'compressor']" onClick={() => setBurger(false)}> Компрессоры</Link>
-                <Link href="['tools', 'rest']" onClick={() => setBurger(false)}> Техника для отдыха</Link>
-                <Link href="['tools', 'garden']" onClick={() => setBurger(false)}> Садовая техника</Link>
-                <Link href="['tools', 'heatgun']" onClick={() => setBurger(false)}> Тепловые пушки</Link>
-                <Link href="['delivery']" onClick={() => setBurger(false)}> Доставка и оплата</Link>
-                <Link href="['contacts']" onClick={() => setBurger(false)}> Контакты</Link>
+                {searchMobile &&
+                    <>
+                        <input id="burger" type="checkbox" onChange={(e) => setBurger(e.target.checked)} />
+                        <label htmlFor="burger" className="header__nav_mobile">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </label>
+                    </>
+                }
             </nav>
+            {searchMobile &&
+                <nav className={cn("mobile__nav", { 'mobile__nav_visible': burger })}>
+                    <Link href="['tools', 'electro']" onClick={() => setBurger(false)}> Электроинструмент</Link>
+                    <Link href="['tools', 'benzo']" onClick={() => setBurger(false)}> Бензоинструмент</Link>
+                    <Link href="['tools', 'welding']" onClick={() => setBurger(false)}> Сварочные аппараты</Link>
+                    <Link href="['tools', 'generator']" onClick={() => setBurger(false)}> Генераторы</Link>
+                    <Link href="['tools', 'compressor']" onClick={() => setBurger(false)}> Компрессоры</Link>
+                    <Link href="['tools', 'rest']" onClick={() => setBurger(false)}> Техника для отдыха</Link>
+                    <Link href="['tools', 'garden']" onClick={() => setBurger(false)}> Садовая техника</Link>
+                    <Link href="['tools', 'heatgun']" onClick={() => setBurger(false)}> Тепловые пушки</Link>
+                    <Link href="['delivery']" onClick={() => setBurger(false)}> Доставка и оплата</Link>
+                    <Link href="['contacts']" onClick={() => setBurger(false)}> Контакты</Link>
+                </nav>}
 
         </header >
     )
