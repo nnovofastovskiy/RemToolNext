@@ -362,7 +362,7 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCategoryCategory extends Schema.SingleType {
+export interface ApiCategoryCategory extends Schema.CollectionType {
   collectionName: 'categories';
   info: {
     singularName: 'category';
@@ -373,7 +373,12 @@ export interface ApiCategoryCategory extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    Title: Attribute.String & Attribute.Unique;
+    Title: Attribute.String;
+    tools: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::tool.tool'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -388,6 +393,36 @@ export interface ApiCategoryCategory extends Schema.SingleType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiToolTool extends Schema.CollectionType {
+  collectionName: 'tools';
+  info: {
+    singularName: 'tool';
+    pluralName: 'tools';
+    displayName: 'Tool';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    category: Attribute.Relation<
+      'api::tool.tool',
+      'manyToOne',
+      'api::category.category'
+    >;
+    Title: Attribute.String;
+    Image: Attribute.Media;
+    Pricelist: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tool.tool', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::tool.tool', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -718,6 +753,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::category.category': ApiCategoryCategory;
+      'api::tool.tool': ApiToolTool;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;

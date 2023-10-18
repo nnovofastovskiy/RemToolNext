@@ -1,5 +1,5 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "categories",
   "info": {
     "singularName": "category",
@@ -12,8 +12,13 @@
   "pluginOptions": {},
   "attributes": {
     "Title": {
-      "type": "string",
-      "unique": true
+      "type": "string"
+    },
+    "tools": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tool.tool",
+      "mappedBy": "category"
     }
   }
 }
