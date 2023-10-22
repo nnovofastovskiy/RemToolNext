@@ -725,14 +725,14 @@ export interface ApiToolTool extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String;
-    image: Attribute.Media;
-    pricelist: Attribute.RichText;
     category: Attribute.Relation<
       'api::tool.tool',
       'manyToOne',
       'api::category.category'
     >;
+    Title: Attribute.String;
+    Image: Attribute.Media;
+    Pricelist: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
