@@ -5,15 +5,20 @@ import styles from './Header.module.scss';
 import cn from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 import { DropMenu } from '../DropMenu/DropMenu';
+import { ICategory } from '../DropMenu/DropMenu.props';
 
 const getCategories = async () => {
-    const data = await fetch('http://localhost:1337/api/categories');
-    return await data.json();
+    const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories');
+    const res = await data.json();
+    return res.data;
 }
 
-getCategories().then(data => {
-    console.log(data.data);
-})
+const getTools = async (catId: number) => {
+    const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*');
+    const res = await data.json();
+    return res.data.attributes.tools.data;
+}
+
 
 type Tool = {
     includedIds: string[]
@@ -47,11 +52,22 @@ const contactsSettings = {
 }
 
 export const Header = () => {
-    // useEffect(() => {
-    //     getCategories().then(data => {
-    //         console.log(data.data);
-    //     })
-    // }, [])
+    const [categories, setCategories] = useState<ICategory[]>();
+    // getCategories().then(res => {
+    //     console.log(res);
+    // })
+    useEffect(() => {
+        getCategories().then(res => {
+            // console.log(res);
+            setCategories(res);
+        });
+        getTools(1).then(res => {
+            console.log(res);
+
+        })
+        // console.log(categories);
+
+    }, [])
 
 
     const [dropMenuFlag, setDropMenuFlag] = useState(false);
@@ -140,8 +156,8 @@ export const Header = () => {
                                     strokeLinejoin="round" />
                             </svg>
                         </div>
-                        {dropMenuFlag &&
-                            <DropMenu />
+                        {dropMenuFlag && !!categories &&
+                            <DropMenu categories={categories} />
                             // <div className={styles["drop-menu"]}>
                             //     <div>
                             //         <div

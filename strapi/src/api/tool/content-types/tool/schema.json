@@ -18,18 +18,23 @@
       "target": "api::category.category",
       "inversedBy": "tools"
     },
-    "Title": {
-      "type": "string"
+    "title": {
+      "type": "string",
+      "unique": true
     },
-    "Image": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
-    "Pricelist": {
-      "type": "json"
+    "pricelist": {
+      "type": "richtext"
+    },
+    "seoTitle": {
+      "type": "string"
     }
   }
 }

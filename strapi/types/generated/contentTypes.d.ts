@@ -730,9 +730,10 @@ export interface ApiToolTool extends Schema.CollectionType {
       'manyToOne',
       'api::category.category'
     >;
-    Title: Attribute.String;
-    Image: Attribute.Media;
-    Pricelist: Attribute.JSON;
+    title: Attribute.String & Attribute.Unique;
+    image: Attribute.Media;
+    pricelist: Attribute.RichText;
+    seoTitle: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

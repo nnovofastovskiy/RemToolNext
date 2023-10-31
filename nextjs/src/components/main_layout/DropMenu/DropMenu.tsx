@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from './DropMenu.module.scss';
 import Link from 'next/link';
 import cn from 'classnames';
+import { DropMenuProps } from './DropMenu.props';
 
 const tools = {
     electro: ['Болгарка'],
@@ -16,7 +17,7 @@ const tools = {
     rest: [],
 }
 
-export const DropMenu = () => {
+export const DropMenu = ({ categories, ...props }: DropMenuProps) => {
 
     const [sideElectro, setSideElectro] = useState(false);
     const [sideFuel, setSideFuel] = useState(false);
@@ -38,7 +39,45 @@ export const DropMenu = () => {
     return (
         <div className={styles["drop-menu"]}>
             <div>
-                <div
+                {
+                    categories.map(cat => (
+                        <div
+                            key={`drop-menu-item${cat.id}`}
+                            className={cn(styles['drop-menu__item'], { [styles['drop-menu__item_hover']]: sideElectro })}
+                            onMouseEnter={() => arrowRight('electrom')}
+                            onMouseLeave={() => setSideElectro(false)}
+                            onClick={() => arrowRight('electro')}
+                        >
+                            <Link
+                                className={styles["drop-menu__link"]}
+                                href={`tools/cat${cat.id}`}
+                                onClick={() => dropMenuHide()}
+                            >
+                                {cat.attributes.title}
+                            </Link>
+                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2L7 7L2 12" stroke="black" strokeWidth="3" strokeLinecap="round"
+                                    strokeLinejoin="round" />
+                            </svg>
+                            {sideElectro && <div className={styles["side-drop-menu"]}>
+                                {tools.electro.map((tool, i) => {
+                                    return (
+                                        <Link
+                                            key={`electro-${i}`}
+                                            href={`tools/electro/id`}
+                                            // href="['tools', 'electro', this.tools.electro.includedIds[i]]"
+                                            onClick={() => dropMenuHide()}
+                                        >
+                                            {tool}
+                                        </Link>
+                                    );
+                                })}
+                            </div>}
+                        </div>
+                    ))
+                }
+                {/* <div
                     className={cn(styles['drop-menu__item'], { [styles['drop-menu__item_hover']]: sideElectro })}
                     onMouseEnter={() => arrowRight('electrom')}
                     onMouseLeave={() => setSideElectro(false)}
@@ -293,7 +332,7 @@ export const DropMenu = () => {
                             );
                         })}
                     </div>}
-                </div>
+                </div> */}
             </div>
         </div>
     )

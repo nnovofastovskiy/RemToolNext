@@ -21,7 +21,7 @@ body {
   padding: 0 16px;
   font-family: 'Montserrat', sans-serif;
   box-sizing: border-box;
-  min-height: 1vw;
+  min-height: 100vh;
 }
 
 .visibility-hidden {
