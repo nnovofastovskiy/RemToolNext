@@ -1,16 +1,20 @@
 import axios from 'axios';
-import styles from './page.module.css'
+import styles from './page.module.scss';
+import { MainSwiper } from '@/components/MainSwiper/MainSwiper';
+import { getSlides } from '@/api/getData';
 
-async function getCategories() {
-  const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories');
-  // const res = await data.json();
-  // console.log(data);
 
-  return await data.json();
-}
+// async function getCategories() {
+//   const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories');
+//   // const res = await data.json();
+//   // console.log(data);
+
+//   return await data.json();
+// }
 
 export default async function Home() {
-  const categories = await getCategories();
+  const slides = await getSlides();
+  // const categories = await getCategories();
   // const data = await fetch('https://fakestoreapi.com/products');
   // const categories = await data.json();
   // console.log(categories);
@@ -18,18 +22,77 @@ export default async function Home() {
 
   return (
     <main className={styles.main}>
-      HOME PAGE
-      <div>{JSON.stringify(categories, null, 4)}</div>
-      {/* <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati doloremque facere dignissimos officiis nam eaque voluptatum veniam natus inventore porro? Et perspiciatis vero unde dolor quae ea molestiae iure magnam?
-        Voluptates corporis officia dolor beatae commodi natus iusto molestias voluptate soluta in maxime quidem dolorem possimus voluptas ab, iure explicabo! Dolores, veniam harum tempora aliquid aspernatur quisquam quidem doloribus nihil?
-        Vero hic, consequuntur asperiores minima eveniet magni, nam alias modi fugiat quae qui molestiae debitis deleniti laborum amet odio placeat magnam fuga in? Velit laborum eius, aliquam autem quia quisquam!
-        Veritatis numquam fugiat veniam sequi amet sit voluptates omnis voluptatibus enim, distinctio repellat reprehenderit. Pariatur deleniti vitae eligendi aliquid modi dolorem eveniet quibusdam in, repudiandae eius recusandae debitis, ad dolorum!
-        Delectus nemo repellat earum aut mollitia ad non aspernatur, esse vero unde, provident atque consectetur autem in eligendi doloremque at similique? Quis eaque iusto voluptate atque, incidunt dolorum magni maxime!
-        Iure animi architecto soluta, adipisci saepe ipsam cupiditate cum fuga pariatur eos repudiandae quas. Possimus illo nobis vitae eaque illum assumenda soluta doloremque ex quis ipsum nulla, placeat corrupti quaerat.
-        Deleniti possimus hic iure numquam animi facilis magni quaerat saepe eos officia voluptatum ducimus incidunt, voluptatem quae ex. Sint, temporibus obcaecati. Laborum odit assumenda voluptatem veniam ullam perferendis amet fugit.
-        Voluptas provident ullam, delectus eius, quibusdam iure culpa blanditiis sapiente, similique modi tempora quasi unde fugit beatae autem nihil iusto. Architecto amet minus nobis, odio culpa corrupti voluptate inventore molestias!
-        Quod, eveniet dolorem at fugit nesciunt totam, voluptatem blanditiis ratione inventore saepe praesentium natus, tenetur eius quia nostrum! Molestias sapiente quia similique vel eum natus hic, nesciunt rerum a animi.
-        Odit aperiam fuga, vel tempore hic aut sequi dicta commodi magni dignissimos reiciendis accusantium fugit voluptatum. Laboriosam, unde dolore? Beatae consectetur molestias ipsum asperiores magni id, cum rerum neque optio!</p> */}
+      <section className={styles.hero}>
+        <h1 className={styles.hero__header}>
+          Ремонт строительного инструмента
+        </h1>
+        <div>
+        </div>
+        {/* <div style={{ backgroundColor: 'gray' }}>
+          swiper
+        </div> */}
+        <MainSwiper className={styles.hero__slider} slides={slides} />
+        {/* <app-swiper className="hero__slider"></app-swiper> */}
+      </section>
+      {/* <app-we-repair-block></app-we-repair-block> */}
+      <section className={styles.advantage}>
+        <h2 className={styles["main-h2"]}>Почему мы</h2>
+        <div className={styles.advantage__wrapper}>
+          <div className={styles.advantage__item}>
+            <img src="/diagnostic.svg" alt="" />
+            Качественная<br />
+            диагностика
+          </div>
+          <div className={styles.advantage__item}>
+            <img src="/guarantee.svg" alt="" />
+            Гарантия<br />на&nbsp;ремонт
+          </div>
+          <div className={styles.advantage__item}>
+            <img src="/delivery.svg" alt="" />
+            Выездной<br />ремонт
+          </div>
+          <div className={styles.advantage__item}>
+            <img src="/experience.svg" alt="" />
+            Многолетний<br />опыт
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.brands}>
+        <h2 className={styles["main-h2"]}>Бренды</h2>
+        {/* <app-swiper-brands className="brands__slider"></app-swiper-brands> */}
+      </section>
+
+      <section className={styles.popular}>
+        <h2 className={styles["main-h2"]}>Популярные услуги</h2>
+        <div className={styles.popular__wrapper}>
+          {/* <a [routerLink]="['/tools/electro/60204a293849a51e6c282724']">Замена ствола перфоратора</a>
+        <a [routerLink]="['/tools/electro/5fbd4580f60fe9f911acfc51']">Замена щеток в шуруповерте</a>
+        <a [routerLink]="['/tools/electro/5fafcfaffc3c14750ef09c2c']">Замена подшипника редуктора болгарки</a>
+        <a [routerLink]="['/tools/electro/601838b30a7bf6c0193334f7']">Заточка ножа триммера</a>
+        <a [routerLink]="['/tools/electro/5fec728b343f593d065ac100']">Заточка цепи бензопилы</a>
+        <a [routerLink]="['/tools/electro/6019908c50256c7fd0638ce8']">Замена свечи зажигания бензогенератора</a>
+        <a [routerLink]="['/tools/electro/60201a3f6228a9905411658c']">Замена выпрямителя в сварочном аппарате</a>
+        <a [routerLink]="['/tools/compressor/602017146228a99054116582']">Регулировка давления компрессора</a> */}
+        </div>
+      </section>
+
+      <section className={styles.description}>
+        <h2 className={styles["main-h2"]}>РЕМТУЛ - это профессиональный ремонт строительного инструмента</h2>
+        <div className={styles.description__content}>
+          <p className={styles.description__text}>
+            Любой даже самый дорогой и качественный инструмент имеет ограниченный ресурс работы.
+            Зачастую износ деталей и частей инструмента приводит к поломкам в самый неподходящий момент.
+            Чтобы избежать неожиданного выхода из строя Вашего инструмента настоятельно рекомендуем придерживаться регламента на его обслуживание.
+            <br />
+            <br />
+            Наш сервисный центр производит профессиональное обслуживание и ремонт строительного инструмента любых производителей.
+          </p>
+          <div className={styles.description__process}>
+            <img src="/fix_process.png" alt="" />
+          </div>
+        </div>
+      </section>
     </main>
   )
 }

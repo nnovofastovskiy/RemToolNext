@@ -5,13 +5,14 @@ import styles from './Header.module.scss';
 import cn from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 import { DropMenu } from '../DropMenu/DropMenu';
-import { ICategory } from '../DropMenu/DropMenu.props';
+import { ICategory, getAllCategories } from '@/api/getData';
+import { HeaderProps } from './Header.props';
 
-const getCategories = async () => {
-    const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories');
-    const res = await data.json();
-    return res.data;
-}
+// const getCategories = async () => {
+//     const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories' + '?populate=*');
+//     const res = await data.json();
+//     return res.data;
+// }
 
 const getTools = async (catId: number) => {
     const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*');
@@ -51,34 +52,36 @@ const contactsSettings = {
     phoneNumber: '12314141'
 }
 
-export const Header = () => {
-    const [categories, setCategories] = useState<ICategory[]>();
+
+export const Header = ({ categories }: HeaderProps) => {
+    // const categories = await getAllCategories();
+    // const [categories, setCategories] = useState<ICategory[]>();
     // getCategories().then(res => {
     //     console.log(res);
     // })
-    useEffect(() => {
-        getCategories().then(res => {
-            // console.log(res);
-            setCategories(res);
-        });
-        getTools(1).then(res => {
-            console.log(res);
+    // useEffect(() => {
+    //     getAllCategories().then(res => {
+    //         console.log(res);
+    //         setCategories(res);
+    //     });
+    //     // getTools(1).then(res => {
+    //     //     console.log(res);
 
-        })
-        // console.log(categories);
+    //     // })
+    //     // console.log(categories);
 
-    }, [])
+    // }, [])
 
 
     const [dropMenuFlag, setDropMenuFlag] = useState(false);
-    const [sideElectro, setSideElectro] = useState(false);
-    const [sideFuel, setSideFuel] = useState(false);
-    const [sideGarden, setSideGarden] = useState(false);
-    const [sideCompressors, setSideCompressors] = useState(false);
-    const [sideGenerators, setSideGenerators] = useState(false);
-    const [sideWelding, setSideWelding] = useState(false);
-    const [sideHeatguns, setSideHeatguns] = useState(false);
-    const [sideRest, setSideRest] = useState(false);
+    // const [sideElectro, setSideElectro] = useState(false);
+    // const [sideFuel, setSideFuel] = useState(false);
+    // const [sideGarden, setSideGarden] = useState(false);
+    // const [sideCompressors, setSideCompressors] = useState(false);
+    // const [sideGenerators, setSideGenerators] = useState(false);
+    // const [sideWelding, setSideWelding] = useState(false);
+    // const [sideHeatguns, setSideHeatguns] = useState(false);
+    // const [sideRest, setSideRest] = useState(false);
     const [burger, setBurger] = useState(false);
     const [resultHover, setResultHover] = useState(false);
 
@@ -86,8 +89,8 @@ export const Header = () => {
     const [searchPlaceholder, setSearchPlaceholder] = useState('');
     const [searchFocuse, setSearchFocuse] = useState(false);
 
-    const [type, setType] = useState();
-    const [service, setService] = useState();
+    // const [type, setType] = useState();
+    // const [service, setService] = useState();
 
     const [searchValue, setSearchValue] = useState('');
     const [searchTypes, setSearchTypes] = useState<string[]>([]);
@@ -108,9 +111,9 @@ export const Header = () => {
         }
     }
 
-    const arrowRight = (type: string) => {
+    // const arrowRight = (type: string) => {
 
-    }
+    // }
 
     const searchTool = () => {
 

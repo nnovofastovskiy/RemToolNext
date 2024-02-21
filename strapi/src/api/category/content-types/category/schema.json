@@ -21,6 +21,13 @@
       "relation": "oneToMany",
       "target": "api::tool.tool",
       "mappedBy": "category"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

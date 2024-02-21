@@ -19,6 +19,8 @@ const tools = {
 
 export const DropMenu = ({ categories, ...props }: DropMenuProps) => {
 
+    const [openCat, setOpenCat] = useState<number>();
+
     const [sideElectro, setSideElectro] = useState(false);
     const [sideFuel, setSideFuel] = useState(false);
     const [sideGarden, setSideGarden] = useState(false);
@@ -43,10 +45,13 @@ export const DropMenu = ({ categories, ...props }: DropMenuProps) => {
                     categories.map(cat => (
                         <div
                             key={`drop-menu-item${cat.id}`}
-                            className={cn(styles['drop-menu__item'], { [styles['drop-menu__item_hover']]: sideElectro })}
-                            onMouseEnter={() => arrowRight('electrom')}
-                            onMouseLeave={() => setSideElectro(false)}
-                            onClick={() => arrowRight('electro')}
+                            className={cn(styles['drop-menu__item'], { [styles['drop-menu__item_hover']]: openCat === cat.id })}
+                            // onMouseEnter={() => arrowRight('electrom')}
+                            onMouseEnter={() => setOpenCat(cat.id)}
+                            // onMouseLeave={() => setSideElectro(false)}
+                            onMouseLeave={() => setOpenCat(cat.id)}
+                            // onClick={() => arrowRight('electro')}
+                            onClick={() => setOpenCat(cat.id)}
                         >
                             <Link
                                 className={styles["drop-menu__link"]}
@@ -60,19 +65,18 @@ export const DropMenu = ({ categories, ...props }: DropMenuProps) => {
                                 <path d="M2 2L7 7L2 12" stroke="black" strokeWidth="3" strokeLinecap="round"
                                     strokeLinejoin="round" />
                             </svg>
-                            {sideElectro && <div className={styles["side-drop-menu"]}>
-                                {tools.electro.map((tool, i) => {
-                                    return (
-                                        <Link
-                                            key={`electro-${i}`}
-                                            href={`tools/electro/id`}
-                                            // href="['tools', 'electro', this.tools.electro.includedIds[i]]"
-                                            onClick={() => dropMenuHide()}
-                                        >
-                                            {tool}
-                                        </Link>
-                                    );
-                                })}
+                            {openCat === cat.id && <div className={styles["side-drop-menu"]}>
+                                {cat.attributes.tools.data.map(tool => (
+                                    <Link
+                                        key={`tool-${tool.id}`}
+                                        href={`tools/cat${cat.id}/${tool.id}`}
+                                        // href="['tools', 'electro', this.tools.electro.includedIds[i]]"
+                                        onClick={() => dropMenuHide()}
+                                    >
+                                        {tool.attributes.title}
+                                    </Link>
+                                )
+                                )}
                             </div>}
                         </div>
                     ))
