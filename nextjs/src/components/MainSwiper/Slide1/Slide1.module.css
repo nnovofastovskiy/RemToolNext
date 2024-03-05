@@ -1,20 +1,30 @@
 .wrapper {
     position: relative;
     height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .img {
     z-index: -1;
-    position: absolute;
+    object-fit: cover;
+    /* position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 }
 
 .title {
     font-size: 2rem;
+    margin-bottom: 12px;
 }
 
 .text {
     font-size: 1.4rem;
+}
+
+.links {
+    display: flex;
+    gap: 12px;
 }

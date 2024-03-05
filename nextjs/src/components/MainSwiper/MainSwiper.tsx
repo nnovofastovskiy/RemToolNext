@@ -19,6 +19,8 @@ import { useRef } from 'react';
 
 export const MainSwiper = ({ className, slides }: MainSwiperProps) => {
     const paginationRef = useRef(null);
+    const navigationPrevRef = useRef<HTMLDivElement>(null);
+    const navigationNextRef = useRef<HTMLDivElement>(null);
     return (
         // <!-- Slider main container -->
         <div
@@ -31,14 +33,30 @@ export const MainSwiper = ({ className, slides }: MainSwiperProps) => {
                 modules={[Autoplay, Navigation, Pagination]}
                 spaceBetween={0}
                 slidesPerView={1}
-                navigation
+                // navigation
+                navigation={{
+                    prevEl: navigationPrevRef.current,
+                    nextEl: navigationNextRef.current,
+                }}
+                onInit={(swiper) => {
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    // eslint-disable-next-line no-param-reassign
+                    swiper.params.navigation.prevEl = navigationPrevRef.current;
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    // eslint-disable-next-line no-param-reassign
+                    swiper.params.navigation.nextEl = navigationNextRef.current;
+                    swiper.navigation.init();
+                    swiper.navigation.update();
+                }}
                 pagination={{
                     // el: paginationRef.current,
                     clickable: true
                 }}
                 // onSlideChange={() => console.log('slide change')}
                 // onSwiper={(swiper) => console.log(swiper)}
-                autoplay={{ delay: 2000, disableOnInteraction: true }}
+                autoplay={{ delay: 2000, disableOnInteraction: true, pauseOnMouseEnter: true }}
                 loop={true}
             >
                 <SwiperSlide
@@ -51,6 +69,8 @@ export const MainSwiper = ({ className, slides }: MainSwiperProps) => {
                 >
                     <Slide2></Slide2>
                 </SwiperSlide>
+                <div ref={navigationPrevRef} className={styles.prev}></div>
+                <div ref={navigationNextRef} className={styles.next}></div>
             </Swiper>
 
         </div>

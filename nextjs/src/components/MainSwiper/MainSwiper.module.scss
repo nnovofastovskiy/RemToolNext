@@ -39,6 +39,53 @@
     color: var(--orange-color);
 }
 
+.prev {
+    left: var(--swiper-navigation-sides-offset, 10px);
+    right: auto;
+}
+
+.next {
+    right: var(--swiper-navigation-sides-offset, 10px);
+    left: auto;
+
+}
+
+.prev,
+.next {
+    position: absolute;
+    top: var(--swiper-navigation-top-offset, 50%);
+    width: calc(var(--swiper-navigation-size) / 44 * 27);
+    height: var(--swiper-navigation-size);
+    margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--swiper-navigation-color, var(--swiper-theme-color));
+
+}
+
+.prev:after {
+    content: 'prev';
+}
+
+.next:after {
+    content: 'next';
+}
+
+.prev:after,
+.next:after {
+    font-family: swiper-icons;
+    font-size: var(--swiper-navigation-size);
+    text-transform: none !important;
+    letter-spacing: 0;
+    /* font-feature-settings: ; */
+    font-variant: initial;
+    line-height: 1;
+    color: var(--orange-color);
+}
+
 // .consult-slide {
 //     color: var(--dark-color);
 //     // background-image: url('/consult.jpg');
@@ -50,7 +97,16 @@
 //     // background-image: url('/diagnostic.jpg');
 // }
 
-@media (max-width: 683.98px) {}
+@media (max-width: 683.98px) {
+    .swiper-slide {
+        padding: 20px;
+    }
+
+    .next,
+    .prev {
+        display: none;
+    }
+}
 
 @media (max-width: 575.98px) {
     // .swiper-slide {
