@@ -2,6 +2,7 @@ import axios from 'axios';
 import styles from './page.module.scss';
 import { MainSwiper } from '@/components/MainSwiper/MainSwiper';
 import { getSlides } from '@/api/getData';
+import { BrandsSwiper } from '@/components/BrandsSwiper/BrandsSwiper';
 
 
 // async function getCategories() {
@@ -60,6 +61,7 @@ export default async function Home() {
 
       <section className={styles.brands}>
         <h2 className={styles["main-h2"]}>Бренды</h2>
+        <BrandsSwiper />
         {/* <app-swiper-brands className="brands__slider"></app-swiper-brands> */}
       </section>
 
