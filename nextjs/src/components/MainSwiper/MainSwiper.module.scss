@@ -11,7 +11,9 @@
 
     :global(.swiper-pagination-bullet-active) {
         background-color: var(--orange-color);
+        // transition-timing-function: linear;
     }
+
 }
 
 

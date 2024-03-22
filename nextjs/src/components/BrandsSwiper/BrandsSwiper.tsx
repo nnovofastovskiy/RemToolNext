@@ -23,7 +23,7 @@ const SLIDES = [
     'partner.jpg',
     'prorab.jpg',
     'sparky.jpg',
-    'sparky2.jpg',
+    // 'sparky2.jpg',
     'stihl.jpg',
 ]
 
@@ -42,14 +42,15 @@ export const BrandsSwiper = ({ className, ...props }: BrandsSwiperProps) => {
             <Swiper
                 className={styles["swiper-wrapper"]}
                 modules={[Autoplay]}
-                spaceBetween={0}
-                slidesPerView='auto'
+                spaceBetween={20}
+                slidesPerView={'auto'}
                 speed={1000}
                 // onSlideChange={() => console.log('slide change')}
                 // onSwiper={(swiper) => console.log(swiper)}
-                autoplay={{ delay: 1, disableOnInteraction: true, pauseOnMouseEnter: true, }}
+                autoplay={{ delay: 0 }}
                 loop={true}
-                transi
+
+            // transi
             >
                 {/* <SwiperSlide
                     className={styles["swiper-slide"]}
@@ -64,8 +65,9 @@ export const BrandsSwiper = ({ className, ...props }: BrandsSwiperProps) => {
                             <Image
                                 src={'/brands/' + slide}
                                 alt=''
-                                width={100}
-                                height={50}
+                                layout={'fill'}
+                            // width={100}
+                            // height={50}
                             >
 
                             </Image>
