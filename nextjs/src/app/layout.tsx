@@ -19,10 +19,15 @@ export default async function RootLayout({
 }) {
   const categories = await getAllCategories();
   const contacts = await getContacts();
+  // console.log(contacts);
+
   return (
     <html lang="ru">
       <body className={inter.className}>
-        <Header categories={categories} />
+        <Header
+          categories={categories}
+          contacts={contacts}
+        />
         {children}
         <Footer categories={categories} contacts={contacts} />
       </body>

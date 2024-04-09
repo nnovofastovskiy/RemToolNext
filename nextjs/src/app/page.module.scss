@@ -18,6 +18,14 @@
     }
 }
 
+.main-h2 {
+    margin: 20px 0;
+    color: var(--dark-color);
+    font-size: 2rem;
+    padding-top: 30px;
+    text-align: center;
+}
+
 .row-4-col {
     display: flex;
     flex-direction: row;
@@ -58,12 +66,6 @@
     margin: 0 auto 30px auto;
 
     // display: flex;
-    &>h2 {
-        color: var(--light-color);
-        font-size: 2rem;
-        padding-top: 30px;
-        text-align: center;
-    }
 
     &__wrapper {
         // width: 100%;
@@ -109,13 +111,6 @@
         width: 100%;
         height: 30px;
         background-color: var(--orange-color);
-    }
-
-    &>h2 {
-        color: var(--dark-color);
-        font-size: 2rem;
-        padding-top: 30px;
-        text-align: center;
     }
 }
 

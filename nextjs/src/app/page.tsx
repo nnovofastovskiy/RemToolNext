@@ -3,6 +3,7 @@ import styles from './page.module.scss';
 import { MainSwiper } from '@/components/MainSwiper/MainSwiper';
 import { getSlides } from '@/api/getData';
 import { BrandsSwiper } from '@/components/BrandsSwiper/BrandsSwiper';
+import { WeRepairBlock } from '@/components/WeRepairBlock/WeRepairBlock';
 
 
 // async function getCategories() {
@@ -59,6 +60,17 @@ export default async function Home() {
         </div>
       </section>
 
+      <section
+        className={styles.we_repair}
+      >
+        <h2
+          className={styles["main-h2"]}
+        >
+          Мы ремонтируем
+        </h2>
+        <WeRepairBlock />
+      </section>
+
       <section className={styles.brands}>
         <h2 className={styles["main-h2"]}>Бренды</h2>
         <BrandsSwiper />
@@ -95,6 +107,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-    </main>
+    </main >
   )
 }

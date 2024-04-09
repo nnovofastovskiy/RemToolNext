@@ -28,7 +28,7 @@ export const Footer = ({ categories, contacts }: FooterProps) => {
                 </div>
                 <div className={styles.footer__nav}>
                     {categories.map(cat => (
-                        <Link key={`footer-cat-${cat.id}`} href={`tools/cat${cat.id}`}>{cat.attributes.title}</Link>
+                        <Link key={`footer-cat-${cat.id}`} href={`/tools/${cat.id}`}>{cat.attributes.title}</Link>
                     ))}
                     {/* <Link {[routerLink] = "['tools', 'benzo']"}>Бензоинструмент</Link>
                     <Link {[routerLink] = "['tools', 'welding']"}>Сварочные аппараты</Link>

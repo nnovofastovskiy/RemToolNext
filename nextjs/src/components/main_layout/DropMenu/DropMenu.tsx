@@ -55,7 +55,7 @@ export const DropMenu = ({ categories, ...props }: DropMenuProps) => {
                         >
                             <Link
                                 className={styles["drop-menu__link"]}
-                                href={`tools/cat${cat.id}`}
+                                href={`/tools/${cat.id}`}
                                 onClick={() => dropMenuHide()}
                             >
                                 {cat.attributes.title}
@@ -69,7 +69,7 @@ export const DropMenu = ({ categories, ...props }: DropMenuProps) => {
                                 {cat.attributes.tools.data.map(tool => (
                                     <Link
                                         key={`tool-${tool.id}`}
-                                        href={`tools/cat${cat.id}/${tool.id}`}
+                                        href={`/tools/${cat.id}/${tool.id}`}
                                         // href="['tools', 'electro', this.tools.electro.includedIds[i]]"
                                         onClick={() => dropMenuHide()}
                                     >

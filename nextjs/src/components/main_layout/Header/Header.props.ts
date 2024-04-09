@@ -1,5 +1,6 @@
-import { ICategory } from '@/api/getData';
+import { ICategory, IContacts } from '@/api/getData';
 
 export interface HeaderProps {
-    categories: ICategory[]
+    categories: ICategory[],
+    contacts: IContacts
 }
