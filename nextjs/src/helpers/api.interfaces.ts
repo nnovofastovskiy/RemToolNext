@@ -5,6 +5,7 @@ export interface ICategory {
 
 export interface ICatAttributes {
     title: string
+    seoTitle: string
     createdAt: string
     updatedAt: string
     publishedAt: string
@@ -64,4 +65,29 @@ export interface IImageAttributes {
     provider_metadata: any
     createdAt: string
     updatedAt: string
+}
+
+export interface IContacts {
+    id: number,
+    attributes: {
+        email: string,
+        phoneNumber: string,
+        createdAt: string,
+        updatedAt: string,
+        publishedAt: string,
+    }
+}
+
+export interface ISlide {
+    id: number,
+    attributes: {
+        link: string,
+        title: string,
+        text: string,
+        textColor: string,
+        image: {
+            url: string,
+            alt: string
+        }
+    }
 }

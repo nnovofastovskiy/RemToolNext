@@ -696,6 +696,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'api::tool.tool'
     >;
     image: Attribute.Media;
+    seoTitle: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

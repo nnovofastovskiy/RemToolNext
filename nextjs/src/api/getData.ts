@@ -1,64 +1,5 @@
-// export interface ITool {
-//     id: number,
-//     attributes: {
-//         title: string,
-//         seoTitle: string
-//         pricelist: string,
-//         createdAt: string,
-//         updatedAt: string,
-//         publishedAt: string,
-//     }
-// }
+import { ICategory, IContacts, ISlide, ITool } from "@/helpers/api.interfaces"
 
-import { ICategory, ITool } from "@/helpers/api.interfaces"
-import axios from "axios"
-
-// export interface ICategory {
-//     id: number,
-//     attributes: {
-//         title: string,
-//         createdAt: string,
-//         updatedAt: string,
-//         publishedAt: string,
-//         tools: {
-//             data: ITool[]
-//         }
-//     }
-// }
-
-export interface IContacts {
-    id: number,
-    attributes: {
-        email: string,
-        phoneNumber: string,
-        createdAt: string,
-        updatedAt: string,
-        publishedAt: string,
-    }
-}
-
-export interface ISlide {
-    id: number,
-    attributes: {
-        link: string,
-        title: string,
-        text: string,
-        textColor: string,
-        image: {
-            url: string,
-            alt: string
-        }
-    }
-}
-
-// export const getAllCategories = async (): Promise<ICategory[]> => {
-//     const { data } = await axios('http://127.0.0.1:1337/api/categories?populate=*');
-//     // const res = await data;
-//     console.log('GET ALL CATEGORIES');
-//     console.log(data);
-
-//     return data.data;
-// }
 export const getAllCategories = async (): Promise<ICategory[]> => {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -114,4 +55,10 @@ export const getSlides = async (): Promise<ISlide[]> => {
     // console.log('getSlides');
 
     return slides;
+}
+
+export const getTool = async (toolId: number): Promise<ITool> => {
+    const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/tools/' + String(toolId) + '?populate=*', { method: "GET" });
+    const res = await data.json();
+    return res.data;
 }
