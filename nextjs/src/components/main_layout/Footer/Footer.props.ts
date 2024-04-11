@@ -1,4 +1,4 @@
-import { ICategory, IContacts } from '@/api/getData';
+import { ICategory, IContacts } from '@/helpers/api.interfaces';
 
 export interface FooterProps {
     categories: ICategory[],
