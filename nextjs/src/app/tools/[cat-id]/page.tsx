@@ -1,6 +1,7 @@
 import { getCategory, getAllToolsInCat } from '@/api/getData';
 import styles from './page.module.scss';
 import { ToolCard } from '@/components/ToolCard/ToolCard';
+import router from 'next/router';
 
 import type { Metadata, ResolvingMetadata } from 'next'
 
@@ -17,7 +18,10 @@ export async function generateMetadata(
     // read route params
     const catId = parseInt(params['cat-id']);
     const category = await getCategory(catId);
-    console.log(category.attributes.image.data.attributes.url);
+    if (!category) return {
+        title: 'Ошибка'
+    }
+    console.log(category);
 
 
     // fetch data

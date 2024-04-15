@@ -8,11 +8,11 @@
     position: relative;
     width: 200px;
     height: 200px;
-    // display: flex;
-    // justify-content: center;
+    display: flex;
+    justify-content: center;
 
     & img {
-        margin: 0 auto;
+        // margin: 0 auto;
         object-fit: contain;
     }
 }
