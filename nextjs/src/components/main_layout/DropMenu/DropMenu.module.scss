@@ -28,6 +28,7 @@
         text-decoration: none;
         color: var(--dark-color);
         cursor: pointer;
+        text-wrap: nowrap;
 
         &:hover {
             color: var(--orange-color);

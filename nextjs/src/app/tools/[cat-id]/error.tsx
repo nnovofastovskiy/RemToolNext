@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@/components/Button/Button';
 import styles from './page.module.scss';
 
 
@@ -16,11 +17,16 @@ export default function Error({
         >
             <h2
                 className={styles.error_title}
-            >Такой категории не существует</h2>
-            <button
+            >
+                Такой категории не существует
+            </h2>
+            <Button
+                type='primary'
                 className={styles.error_button}
                 onClick={() => window.history.back()}
-            >Назад</button>
+            >
+                Назад
+            </Button>
         </main>
     )
 }
