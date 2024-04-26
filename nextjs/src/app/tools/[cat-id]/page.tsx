@@ -1,6 +1,7 @@
 import { getCategory, getAllToolsInCat } from '@/api/getData';
 import styles from './page.module.scss';
 import { ToolCard } from '@/components/ToolCard/ToolCard';
+import router from 'next/router';
 
 import type { Metadata, ResolvingMetadata } from 'next'
 import { ICategory } from '@/helpers/api.interfaces';

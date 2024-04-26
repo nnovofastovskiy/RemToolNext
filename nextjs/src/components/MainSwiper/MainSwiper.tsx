@@ -17,7 +17,7 @@ import { Slide1 } from './Slide1/Slide1';
 import { Slide2 } from './Slide2/Slide2';
 import { useRef } from 'react';
 
-export const MainSwiper = ({ className, slides }: MainSwiperProps) => {
+export const MainSwiper = ({ className }: MainSwiperProps) => {
     const paginationRef = useRef(null);
     const navigationPrevRef = useRef<HTMLDivElement>(null);
     const navigationNextRef = useRef<HTMLDivElement>(null);
@@ -39,11 +39,9 @@ export const MainSwiper = ({ className, slides }: MainSwiperProps) => {
                     nextEl: navigationNextRef.current,
                 }}
                 onInit={(swiper) => {
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
                     // eslint-disable-next-line no-param-reassign
                     swiper.params.navigation.prevEl = navigationPrevRef.current;
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
                     // eslint-disable-next-line no-param-reassign
                     swiper.params.navigation.nextEl = navigationNextRef.current;

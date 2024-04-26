@@ -1,30 +1,32 @@
-'use client';
+'use client'
 
-import { useEffect } from 'react';
+import { Button } from '@/components/Button/Button';
+import styles from './page.module.scss';
+
 
 export default function Error({
     error,
-    reset,
+    reset
 }: {
-    error: Error & { digest?: string };
-    reset: () => void;
+    error: Error,
+    reset: () => void
 }) {
-    useEffect(() => {
-        // Optionally log the error to an error reporting service
-        console.error(error);
-    }, [error]);
-
     return (
-        <main>
-            <h2>{error.message}</h2>
-            <button
-                onClick={
-                    // Attempt to recover by trying to re-render the invoices route
-                    () => reset()
-                }
+        <main
+            className={styles.error_page}
+        >
+            <h2
+                className={styles.error_title}
             >
-                Try again
-            </button>
+                Такой категории не существует
+            </h2>
+            <Button
+                type='primary'
+                className={styles.error_button}
+                onClick={() => window.history.back()}
+            >
+                Назад
+            </Button>
         </main>
-    );
+    )
 }

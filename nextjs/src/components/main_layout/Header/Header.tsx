@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { DropMenu } from '../DropMenu/DropMenu';
 import { getAllCategories } from '@/api/getData';
 import { HeaderProps } from './Header.props';
+import Image from 'next/image';
 
 // const getCategories = async () => {
 //     const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories' + '?populate=*');
@@ -140,7 +141,12 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
                     href="/"
                 // routerLinkActive='active'
                 >
-                    <img src="/header__logo.svg" alt="logo" />
+                    <Image
+                        src="/header__logo.svg"
+                        alt="logo"
+                        width="129"
+                        height="120"
+                    />
                 </Link>
                 <ul>
                     <li
@@ -241,7 +247,12 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
                     </li>}
                     <li className={styles.header__phone}>
                         <Link href={`tel: ${contacts.attributes.phoneNumber}`}>
-                            <img src="/phone-icon.svg" alt="" />
+                            <Image
+                                src="/phone-icon.svg"
+                                alt=""
+                                width="26"
+                                height="26"
+                            />
                             {contacts.attributes.phoneNumber}
                         </Link>
                     </li>

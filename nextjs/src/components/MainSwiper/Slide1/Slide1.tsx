@@ -39,9 +39,9 @@ export const Slide1 = () => {
                 className={styles.img}
                 src={'/consult.jpg'}
                 alt='Фото мастера поремонту инструмента'
-                // width={802}
-                // height={340}
-                fill={true}
+                width={802}
+                height={340}
+                objectFit='cover'
 
             />
         </>

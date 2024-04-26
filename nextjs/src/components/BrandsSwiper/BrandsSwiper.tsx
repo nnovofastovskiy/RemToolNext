@@ -66,6 +66,7 @@ export const BrandsSwiper = ({ className, ...props }: BrandsSwiperProps) => {
                                 src={'/brands/' + slide}
                                 alt=''
                                 layout={'fill'}
+                                objectFit='contain'
                             // width={100}
                             // height={50}
                             >

@@ -1,9 +1,9 @@
-import axios from 'axios';
 import styles from './page.module.scss';
 import { MainSwiper } from '@/components/MainSwiper/MainSwiper';
 import { getSlides } from '@/api/getData';
 import { BrandsSwiper } from '@/components/BrandsSwiper/BrandsSwiper';
 import { WeRepairBlock } from '@/components/WeRepairBlock/WeRepairBlock';
+import Image from 'next/image';
 
 
 // async function getCategories() {
@@ -33,7 +33,7 @@ export default async function Home() {
         {/* <div style={{ backgroundColor: 'gray' }}>
           swiper
         </div> */}
-        <MainSwiper className={styles.hero__slider} slides={slides} />
+        <MainSwiper className={styles.hero__slider} />
         {/* <app-swiper className="hero__slider"></app-swiper> */}
       </section>
       {/* <app-we-repair-block></app-we-repair-block> */}
@@ -41,20 +41,40 @@ export default async function Home() {
         <h2 className={styles["main-h2"]}>Почему мы</h2>
         <div className={styles.advantage__wrapper}>
           <div className={styles.advantage__item}>
-            <img src="/diagnostic.svg" alt="" />
+            <Image
+              src="/diagnostic.svg"
+              alt=""
+              width="123"
+              height="123"
+            />
             Качественная<br />
             диагностика
           </div>
           <div className={styles.advantage__item}>
-            <img src="/guarantee.svg" alt="" />
+            <Image
+              src="/guarantee.svg"
+              alt=""
+              width="123"
+              height="123"
+            />
             Гарантия<br />на&nbsp;ремонт
           </div>
           <div className={styles.advantage__item}>
-            <img src="/delivery.svg" alt="" />
+            <Image
+              src="/delivery.svg"
+              alt=""
+              width="123"
+              height="123"
+            />
             Выездной<br />ремонт
           </div>
           <div className={styles.advantage__item}>
-            <img src="/experience.svg" alt="" />
+            <Image
+              src="/experience.svg"
+              alt=""
+              width="123"
+              height="123"
+            />
             Многолетний<br />опыт
           </div>
         </div>
@@ -103,7 +123,12 @@ export default async function Home() {
             Наш сервисный центр производит профессиональное обслуживание и ремонт строительного инструмента любых производителей.
           </p>
           <div className={styles.description__process}>
-            <img src="/fix_process.png" alt="" />
+            <Image
+              src="/fix_process.png"
+              alt=""
+              width="508"
+              height="594"
+            />
           </div>
         </div>
       </section>

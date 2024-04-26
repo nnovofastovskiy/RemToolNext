@@ -1,0 +1,25 @@
+.primary {
+    background-color: var(--orange-color);
+
+    &:hover {
+        background-color: var(--orange-color-hover);
+    }
+
+    &:active {
+        background-color: var(--orange-color-active);
+    }
+}
+
+.ghost {
+    background: none;
+}
+
+.button {
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-size: 1.25rem;
+    cursor: pointer;
+
+    &:hover {}
+}

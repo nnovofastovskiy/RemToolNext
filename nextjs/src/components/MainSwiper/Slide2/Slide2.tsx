@@ -20,9 +20,9 @@ export const Slide2 = () => {
                 className={styles.img}
                 src={'/diagnostic.jpg'}
                 alt='Фото мастера поремонту инструмента'
-                // width={802}
-                // height={340}
-                fill={true}
+                width={802}
+                height={340}
+                objectFit='cover'
             />
         </>
     );
