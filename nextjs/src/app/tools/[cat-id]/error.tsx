@@ -18,7 +18,7 @@ export default function Error({
             <h2
                 className={styles.error_title}
             >
-                Такой категории не существует
+                {error.message}
             </h2>
             <Button
                 type='primary'
