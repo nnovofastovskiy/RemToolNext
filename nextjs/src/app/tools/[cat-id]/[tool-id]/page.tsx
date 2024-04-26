@@ -1,9 +1,18 @@
 import { getTool } from '@/api/getData';
 import styles from './page.module.scss';
+import { ITool } from '@/helpers/api.interfaces';
+import router from 'next/router';
 
 export default async function Tool({ params }: { params: { 'tool-id': string } }) {
     const toolId = parseInt(params['tool-id']);
-    const tool = await getTool(toolId);
+    let tool: ITool;
+    // try {
+    tool = await getTool(toolId);
+    // } catch (error) {
+    //     router.push("/")
+    // }
+    console.log(tool);
+
     const pricelist = tool.attributes.pricelist.split('\n').map(line => line.split(':'));
     console.log(pricelist);
 

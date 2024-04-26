@@ -9,15 +9,36 @@ export const getAllCategories = async (): Promise<ICategory[]> => {
 }
 
 export const getCategory = async (catId: number): Promise<ICategory> => {
-    const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*', { method: "GET" });
-    const res = await data.json();
-    return res.data;
+    try {
+        const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*', { method: "GET" });
+        if (data.ok) {
+            const res = await data.json();
+            return res.data;
+        } else {
+            throw new Error("Что-то пошло не так");
+        }
+    } catch (e) {
+        throw new Error("Такой категории не существует");
+    }
 }
 
 export const getAllToolsInCat = async (catId: number): Promise<ICategory> => {
-    const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate[tools][populate][0]=image', { method: "GET" });
-    const res = await data.json();
-    return res.data;
+    // const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*', { method: "GET" });
+    const response = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate[tools][populate][0]=image', { method: "GET" })
+        .catch(e => { throw new Error("Что-то пошло не так") });
+    const res = await response.json();
+    if (response.status === 200) {
+        const data = res?.data;
+        if (data) {
+            return data;
+        } else {
+            throw new Error("Такой категории не существует");
+        }
+    } else if (response.status === 404) {
+        throw new Error("Такой категории не существует");
+    } else {
+        throw new Error("Что-то пошло не так");
+    }
 }
 
 export const getContacts = async (): Promise<IContacts> => {

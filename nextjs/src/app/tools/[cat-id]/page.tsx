@@ -3,6 +3,7 @@ import styles from './page.module.scss';
 import { ToolCard } from '@/components/ToolCard/ToolCard';
 
 import type { Metadata, ResolvingMetadata } from 'next'
+import { ICategory } from '@/helpers/api.interfaces';
 
 type Props = {
     params: {
@@ -10,29 +11,34 @@ type Props = {
     }
 }
 
-export async function generateMetadata(
-    { params }: Props,
-    parent: ResolvingMetadata
-): Promise<Metadata> {
-    // read route params
-    const catId = parseInt(params['cat-id']);
-    const category = await getCategory(catId);
-    console.log(category.attributes.image.data.attributes.url);
+// export async function generateMetadata(
+//     { params }: Props,
+//     parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//     // read route params
+//     const catId = parseInt(params['cat-id']);
+//     let category: ICategory;
+//     try {
+//         category = await getCategory(catId);
+//     } catch (error) {
+
+//     }
+//     console.log(category.attributes.image.data.attributes.url);
 
 
-    // fetch data
-    // const product = await fetch(`https://.../${id}`).then((res) => res.json())
+//     // fetch data
+//     // const product = await fetch(`https://.../${id}`).then((res) => res.json())
 
-    // // optionally access and extend (rather than replace) parent metadata
-    // const previousImages = (await parent).openGraph?.images || []
+//     // // optionally access and extend (rather than replace) parent metadata
+//     // const previousImages = (await parent).openGraph?.images || []
 
-    return {
-        title: category.attributes.title,
-        openGraph: {
-            images: [process.env.NEXT_PUBLIC_BACK_DOMAIN + category.attributes.image.data.attributes.url],
-        },
-    }
-}
+//     return {
+//         title: category.attributes.title,
+//         openGraph: {
+//             images: [process.env.NEXT_PUBLIC_BACK_DOMAIN + category.attributes.image.data.attributes.url],
+//         },
+//     }
+// }
 
 export default async function Category({ params }: { params: { 'cat-id': string } }) {
     const catId = parseInt(params['cat-id']);
