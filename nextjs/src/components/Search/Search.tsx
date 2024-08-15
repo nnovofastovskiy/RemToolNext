@@ -1,3 +1,5 @@
+'use client'
+
 import { SearchProps } from "./Search.props"
 import cn from 'classnames';
 import styles from './Search.module.scss';
@@ -7,7 +9,7 @@ function searchTool() {
 
 }
 
-export async function Search({ placeholder = '', className, ...props }: SearchProps) {
+export function Search({ placeholder = '', className, ...props }: SearchProps) {
     // const categories = await getAllCategories();
     // console.log(categories);
     return (

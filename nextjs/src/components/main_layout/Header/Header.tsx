@@ -16,11 +16,11 @@ import { Search } from '@/components/Search/Search';
 //     return res.data;
 // }
 
-const getTools = async (catId: number) => {
-    const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*');
-    const res = await data.json();
-    return res.data.attributes.tools.data;
-}
+// const getTools = async (catId: number) => {
+//     const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*');
+//     const res = await data.json();
+//     return res.data.attributes.tools.data;
+// }
 
 
 type Tool = {
