@@ -1,21 +1,5 @@
 import { getTool } from '@/api/getData';
 import styles from './page.module.scss';
-<<<<<<< HEAD
-import { ITool } from '@/helpers/api.interfaces';
-import router from 'next/router';
-
-export default async function Tool({ params }: { params: { 'tool-id': string } }) {
-    const toolId = parseInt(params['tool-id']);
-    let tool: ITool;
-    // try {
-    tool = await getTool(toolId);
-    // } catch (error) {
-    //     router.push("/")
-    // }
-    console.log(tool);
-
-    const pricelist = tool.attributes.pricelist.split('\n').map(line => line.split(':'));
-=======
 import Image from 'next/image';
 
 export default async function Tool({ params }: { params: { 'tool-id': string } }) {
@@ -30,7 +14,6 @@ export default async function Tool({ params }: { params: { 'tool-id': string } }
         imageWidth = Math.floor(200 / imageRatio);
     }
     const pricelist = tool.attributes.pricelist.split('\n').map(line => line.split(':').map(item => item.trim()));
->>>>>>> 707500dcb79d9a922682e554bc23b7c0dbc86043
     console.log(pricelist);
 
 
@@ -93,10 +76,10 @@ export default async function Tool({ params }: { params: { 'tool-id': string } }
         </div >
     </div >
         <button className="button_ok send-request-btn" onclick="this.blur()" (click) = "sendRequest($event)" > Оставить заявку</button > */}
-            <div>
+            {/* <div>
                 {JSON.stringify(tool, null, 4)}
 
-            </div>
+            </div> */}
         </main >
     )
 }

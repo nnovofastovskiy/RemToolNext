@@ -8,6 +8,7 @@ import { DropMenu } from '../DropMenu/DropMenu';
 import { getAllCategories } from '@/api/getData';
 import { HeaderProps } from './Header.props';
 import Image from 'next/image';
+import { Search } from '@/components/Search/Search';
 
 // const getCategories = async () => {
 //     const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories' + '?populate=*');
@@ -183,7 +184,7 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
                     </li>
                     {!searchMobile && <li className={styles.header__search}>
                         {/* <form formGroup="searchForm" onInput={() => searchTool()}> */}
-                        <form name="searchForm" onInput={() => searchTool()}>
+                        {/* <form name="searchForm" onInput={() => searchTool()}>
                             <input
                                 ref={searchRef}
                                 // formControlName="data"
@@ -195,7 +196,8 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
                                 onBlur={() => setSearchFocuse(false)}
                                 onChange={e => setSearchValue(e.target.value)}
                             />
-                        </form>
+                        </form> */}
+                        <Search />
                         {!searchValue && <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -259,7 +261,7 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
                 </ul>
                 {/* MOBILE SEARCH START */}
                 {searchMobile && <div className={styles.header__search}>
-                    <form
+                    {/* <form
                         // formGroup="searchForm"
                         onInput={() => searchTool()}>
                         <input ref={searchRef}
@@ -273,7 +275,8 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
                                 setBurger(false);
                             }}
                             onBlur={() => setSearchFocuse(false)} />
-                    </form>
+                    </form> */}
+                    <Search />
                     {!searchValue && <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path

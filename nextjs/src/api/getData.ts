@@ -9,16 +9,21 @@ export const getAllCategories = async (): Promise<ICategory[]> => {
 }
 
 export const getCategory = async (catId: number): Promise<ICategory> => {
-    try {
-        const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*', { method: "GET" });
-        if (data.ok) {
-            const res = await data.json();
-            return res.data;
+    // const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*', { method: "GET" });
+    const response = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*', { method: "GET" })
+        .catch(e => { throw new Error("Что-то пошло не так") });
+    const res = await response.json();
+    if (response.status === 200) {
+        const data = res?.data;
+        if (data) {
+            return data;
         } else {
-            throw new Error("Что-то пошло не так");
+            throw new Error("Такой категории не существует");
         }
-    } catch (e) {
+    } else if (response.status === 404) {
         throw new Error("Такой категории не существует");
+    } else {
+        throw new Error("Что-то пошло не так");
     }
 }
 
@@ -50,7 +55,7 @@ export const getContacts = async (): Promise<IContacts> => {
 export const getSlides = async (): Promise<ISlide[]> => {
     const data = await fetch('http://127.0.0.1:1337/api/slides?populate=image', { method: "GET" });
     const res = await data.json();
-    console.log(res.data);
+    // console.log(res.data);
 
     // const slides: ISlide[] = []
 
@@ -79,7 +84,22 @@ export const getSlides = async (): Promise<ISlide[]> => {
 }
 
 export const getTool = async (toolId: number): Promise<ITool> => {
-    const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/tools/' + String(toolId) + '?populate=*', { method: "GET" });
-    const res = await data.json();
-    return res.data;
+    // const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/tools/' + String(toolId) + '?populate=*', { method: "GET" });
+    // const res = await data.json();
+    // return res.data;
+    const response = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/tools/' + String(toolId) + '?populate=*', { method: "GET" })
+        .catch(e => { throw new Error("Что-то пошло не так") });
+    const res = await response.json();
+    if (response.status === 200) {
+        const data = res?.data;
+        if (data) {
+            return data;
+        } else {
+            throw new Error("Такого инструмента не существует");
+        }
+    } else if (response.status === 404) {
+        throw new Error("Такого инструмента не существует");
+    } else {
+        throw new Error("Что-то пошло не так");
+    }
 }
