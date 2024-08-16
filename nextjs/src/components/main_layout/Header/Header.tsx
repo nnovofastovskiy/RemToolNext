@@ -9,6 +9,8 @@ import { getAllCategories } from '@/api/getData';
 import { HeaderProps } from './Header.props';
 import Image from 'next/image';
 import { Search } from '@/components/Search/Search';
+import { NavLink } from '@/components/NavLink/NavLink';
+import { DropData } from '@/components/NavLink/NavLink.props';
 
 // const getCategories = async () => {
 //     const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories' + '?populate=*');
@@ -56,23 +58,28 @@ const contactsSettings = {
 
 
 export const Header = ({ categories, contacts }: HeaderProps) => {
+    const [dropData, setDropData] = useState<DropData[]>();
     // const categories = await getAllCategories();
     // const [categories, setCategories] = useState<ICategory[]>();
     // getCategories().then(res => {
     //     console.log(res);
     // })
-    // useEffect(() => {
-    //     getAllCategories().then(res => {
-    //         console.log(res);
-    //         setCategories(res);
-    //     });
-    //     // getTools(1).then(res => {
-    //     //     console.log(res);
-
-    //     // })
-    //     // console.log(categories);
-
-    // }, [])
+    useEffect(() => {
+        const dropData: DropData[] = categories.map(cat => {
+            const dropData = cat.attributes.tools.data.map(tool => {
+                return {
+                    text: tool.attributes.title,
+                    href: `/${cat.id}/${tool.id}`
+                }
+            });
+            return {
+                text: cat.attributes.title,
+                href: `/${cat.id}`,
+                dropData: dropData
+            }
+        });
+        setDropData(dropData);
+    }, []);
 
 
     const [dropMenuFlag, setDropMenuFlag] = useState(false);
@@ -157,7 +164,7 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
                         onMouseEnter={() => arrowDown('h')}
                         onMouseLeave={() => setDropMenuFlag(false)}
                     >
-                        <Link className={cn(styles.nav__link, styles.drop)} href="/tools" onClick={() => dropMenuHide()}>
+                        {/* <Link className={cn(styles.nav__link, styles.drop)} href="/tools" onClick={() => dropMenuHide()}>
                             Инструменты
                         </Link>
                         <div className={styles["arrow-down"]} onClick={() => arrowDown('t')}>
@@ -165,10 +172,13 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
                                 <path d="M11.5 2L6.5 7L1.5 2" stroke="black" strokeWidth="3" strokeLinecap="round"
                                     strokeLinejoin="round" />
                             </svg>
-                        </div>
-                        {dropMenuFlag && !!categories &&
+                        </div> */}
+                        <NavLink href={"/tools"} dropData={dropData}>
+                            Инструменты
+                        </NavLink>
+                        {/* {dropMenuFlag && !!categories &&
                             <DropMenu categories={categories} />
-                        }
+                        } */}
                     </li>
                     <li
                         className={styles["nav__item"]}
