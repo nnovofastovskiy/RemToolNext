@@ -33,9 +33,18 @@ export function NavLink({ href, children, dropData, className, ...props }: NavLi
                 </svg>
             }
             {(!!dropData && dropFlag) &&
-                <pre>
-                    {JSON.stringify(dropData, null, 2)}
-                </pre>
+                <div className={styles.dropMenu}>
+                    {dropData.map(item => {
+                        return (
+                            <Link
+                                key={`drop-item-${item.href}`}
+                                href={item.href}
+                            >
+                                {item.text}
+                            </Link>
+                        )
+                    })}
+                </div>
             }
         </Link>
     )
