@@ -9,6 +9,7 @@
     left: 0;
     display: flex;
     flex-direction: column;
-    background-color: red;
+    background: var(--grey-grad);
     line-height: 1.6rem;
+    box-shadow: var(--shadow);
 }
