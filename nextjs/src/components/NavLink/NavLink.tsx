@@ -22,13 +22,13 @@ export function NavLink({ href, children, dropData, className, ...props }: NavLi
     const unhoverHandle = () => {
         setDropFlag(false);
     }
-    const keyHandle = (e: KeyboardEvent<HTMLAnchorElement>) => {
-        console.log(e.key);
+    // const keyHandle = (e: KeyboardEvent<HTMLAnchorElement>) => {
+    //     console.log(e.key);
 
-        if (e.key === "Tab") {
-            dropRef.current?.firstChild.focus();
-        }
-    }
+    //     if (e.key === "Tab") {
+    //         dropRef.current?.firstChild.focus();
+    //     }
+    // }
 
     return (
         <>
@@ -37,20 +37,33 @@ export function NavLink({ href, children, dropData, className, ...props }: NavLi
                 className={styles.link}
                 onMouseEnter={hoverHandle}
                 onMouseLeave={unhoverHandle}
-                onFocus={hoverHandle}
+                // onFocus={hoverHandle}
                 onBlur={unhoverHandle}
-                onKeyDown={(e: KeyboardEvent<HTMLAnchorElement>) => keyHandle(e)}
+                // onKeyDown={(e: KeyboardEvent<HTMLAnchorElement>) => keyHandle(e)}
                 {...props}
             >
                 {children}
-                {!!dropData &&
-                    <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+            </Link>
+            {!!dropData &&
+                <button
+                    className={styles.arrow_btn}
+                    onClick={() => setDropFlag(!dropFlag)}
+                >
+                    <svg
+                        className={cn({ [styles.arrow_flip]: dropFlag })}
+                        width="13"
+                        height="9"
+                        viewBox="0 0 13 9"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
                         <path d="M11.5 2L6.5 7L1.5 2" stroke="black" strokeWidth="3" strokeLinecap="round"
                             strokeLinejoin="round" />
                     </svg>
-                }
-            </Link>
-            {(!!dropData && dropFlag) &&
+                </button >
+            }
+            {
+                (!!dropData && dropFlag) &&
                 <ul
                     className={styles.dropMenu}
                     ref={dropRef}
