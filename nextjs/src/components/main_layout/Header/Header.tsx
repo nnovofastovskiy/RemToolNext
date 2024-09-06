@@ -9,8 +9,8 @@ import { getAllCategories } from '@/api/getData';
 import { HeaderProps } from './Header.props';
 import Image from 'next/image';
 import { Search } from '@/components/Search/Search';
-import { NavLink } from '@/components/NavLink/NavLink';
-import { DropData } from '@/components/NavLink/NavLink.props';
+import { DropLink } from '@/components/DropLink/DropLink';
+import { DropData } from '@/components/DropLink/DropLink.props';
 
 // const getCategories = async () => {
 //     const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories' + '?populate=*');
@@ -156,7 +156,7 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
                         height="120"
                     />
                 </Link>
-                <ul>
+                <ul className={styles.nav_ul}>
                     <li
                         className={cn(styles.nav__item, { [styles.nav__item_hover]: dropMenuFlag })}
                         // className="{'nav__item': true, 'nav__item_hover': dropMenuFlag}"
@@ -173,9 +173,9 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
                                     strokeLinejoin="round" />
                             </svg>
                         </div> */}
-                        <NavLink href={"/tools"} dropData={dropData}>
+                        <DropLink href={"/tools"} dropData={dropData}>
                             Инструменты
-                        </NavLink>
+                        </DropLink>
                         {/* {dropMenuFlag && !!categories &&
                             <DropMenu categories={categories} />
                         } */}

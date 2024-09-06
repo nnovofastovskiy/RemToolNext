@@ -10,7 +10,7 @@ export interface DropData {
     }[],
 }
 
-export interface NavLinkProps extends HTMLAttributes<HTMLAnchorElement> {
+export interface DropLinkProps extends HTMLAttributes<HTMLAnchorElement> {
     href: string,
     children?: ReactNode,
     dropData?: DropData[]
