@@ -69,12 +69,12 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
             const dropData = cat.attributes.tools.data.map(tool => {
                 return {
                     text: tool.attributes.title,
-                    href: `/${cat.id}/${tool.id}`
+                    href: `/tools/${cat.id}/${tool.id}`
                 }
             });
             return {
                 text: cat.attributes.title,
-                href: `/${cat.id}`,
+                href: `/tools/${cat.id}`,
                 dropData: dropData
             }
         });

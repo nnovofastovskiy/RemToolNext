@@ -9,32 +9,40 @@ import { useEffect, useRef, useState, KeyboardEvent } from "react";
 
 export function DropLink({ href, children, dropData, className, ...props }: DropLinkProps) {
     const [dropFlag, setDropFlag] = useState(false);
-    const dropRef = useRef<HTMLUListElement>(null);
-
+    // const dropRef = useRef<HTMLUListElement>(null);
+    // const wrapperRef = useRef<HTMLUListElement>(null);
+    // wrapperRef.current?.addEventListener('blur', () => {
+    //     console.log('onblur');
+    //     setDropFlag(false);
+    // });
     // useEffect(() => {
     //     if (dropFlag)
     //         dropRef.current?.tabIndex(1);
     // }, [dropFlag]);
 
-    const hoverHandle = () => {
-        setDropFlag(true);
-    }
-    const unhoverHandle = () => {
-        setDropFlag(false);
-    }
-    const keyHandle = (e: KeyboardEvent<HTMLAnchorElement>) => {
-        console.log(e.key);
+    // const hoverHandle = () => {
+    //     setDropFlag(true);
+    // }
+    // const unhoverHandle = () => {
+    //     setDropFlag(false);
+    // }
+    // const keyHandle = (e: KeyboardEvent<HTMLAnchorElement>) => {
+    //     console.log(e.key);
 
-        if (e.key === "Tab") {
-            if (dropRef.current) {
-                dropRef.current.querySelector('a')?.focus();
-            }
-            // dropRef.current?.firstChild?.focus();
-        }
-    }
+    //     if (e.key === "Tab") {
+    //         if (dropRef.current) {
+    //             dropRef.current.querySelector('a')?.focus();
+    //         }
+    //         // dropRef.current?.firstChild?.focus();
+    //     }
+    // }
 
     return (
-        <ul className={styles.wrapper}>
+        <ul
+            className={cn(styles.wrapper, { [styles.open]: dropFlag })}
+        // ref={wrapperRef}
+        // onBlurCapture={() => setDropFlag(!dropFlag)}
+        >
             <li
                 className={cn(styles.link, styles.first)}
             >

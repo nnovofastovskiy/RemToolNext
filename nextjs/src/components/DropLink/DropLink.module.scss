@@ -22,13 +22,21 @@
     color: red;
 }
 
-.wrapper:hover .dropMenu {
+.wrapper:hover .dropMenu,
+.open .dropMenu {
     display: flex;
 }
 
-.wrapper:focus-within .dropMenu {
-    display: flex;
+.wrapper:hover .arrow_btn {
+    transform: rotate(180deg);
 }
+
+// .wrapper:hover .dropMenu,
+// .wrapper:focus-within .dropMenu {
+//     display: flex;
+// }
+
+
 
 // .link:hover>.link:not(:first-child) {
 //     display: auto;
@@ -38,6 +46,8 @@
     background: none;
     border: none;
     margin-left: 12px;
+    transition: transform 0.2s ease;
+    // pointer-events: none;
 }
 
 .arrow_btn svg {
