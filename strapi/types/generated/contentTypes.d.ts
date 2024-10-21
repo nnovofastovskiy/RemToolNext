@@ -746,42 +746,6 @@ export interface ApiContactsContacts extends Schema.SingleType {
   };
 }
 
-export interface ApiSlideSlide extends Schema.CollectionType {
-  collectionName: 'slides';
-  info: {
-    singularName: 'slide';
-    pluralName: 'slides';
-    displayName: 'Slide';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    image: Attribute.Media;
-    link: Attribute.String;
-    title: Attribute.String;
-    text: Attribute.Text;
-    textColor: Attribute.Enumeration<['black', 'white']> &
-      Attribute.DefaultTo<'black'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::slide.slide',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::slide.slide',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiToolTool extends Schema.CollectionType {
   collectionName: 'tools';
   info: {
@@ -831,7 +795,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::category.category': ApiCategoryCategory;
       'api::contacts.contacts': ApiContactsContacts;
-      'api::slide.slide': ApiSlideSlide;
       'api::tool.tool': ApiToolTool;
     }
   }

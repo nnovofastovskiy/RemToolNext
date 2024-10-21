@@ -1,56 +1,38 @@
 .link {
-    position: relative;
-    line-height: 60px;
-    // display: none;
+    text-wrap: nowrap;
 }
-
-// .link:not(:first-child) {
-//     display: none;
-// }
-
-// .first {
-//     display: block;
-// }
-
-// .link:not(:first-of-type) {
-//     display: none;
-// }
-
 
 .link:hover {
-    display: block !important;
-    color: red;
+    color: var(--orange-color-hover);
+
 }
 
-.wrapper:hover .dropMenu,
-.open .dropMenu {
-    display: flex;
+.main_item {
+    position: relative;
 }
 
-.wrapper:hover .arrow_btn {
+.main_link {
+    display: block;
+    line-height: 60px;
+}
+
+.wrapper:hover .arrow {
     transform: rotate(180deg);
 }
 
-// .wrapper:hover .dropMenu,
-// .wrapper:focus-within .dropMenu {
-//     display: flex;
-// }
+.wrapper:hover .dropMenu,
+.wrapper:focus-within .dropMenu {
+    display: flex;
+}
 
-
-
-// .link:hover>.link:not(:first-child) {
-//     display: auto;
-// }
-
-.arrow_btn {
+.arrow {
     background: none;
     border: none;
     margin-left: 12px;
     transition: transform 0.2s ease;
-    // pointer-events: none;
 }
 
-.arrow_btn svg {
+.arrow svg {
     transition: transform 0.2s ease;
 }
 
@@ -58,17 +40,9 @@
     transform: rotate(180deg);
 }
 
-// .dropItem {
-//     display: none;
-// }
-
-// .link:hover+.dropItem {
-//     display: block;
-// }
-
 .dropMenu {
-    // display: none;
     position: absolute;
+    width: 200px;
     top: 60px;
     left: 0;
     display: none;
@@ -77,4 +51,21 @@
     line-height: 1.6rem;
     box-shadow: var(--shadow);
     z-index: 1;
+}
+
+.first_drop_item {}
+
+.sideDropMenu {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    top: 0;
+    left: 200px;
+    background: var(--grey-grad);
+    text-wrap: nowrap;
+}
+
+.dropItem:hover .sideDropMenu,
+.dropItem:focus-within .sideDropMenu {
+    display: flex;
 }

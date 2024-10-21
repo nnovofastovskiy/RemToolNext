@@ -8,95 +8,79 @@ import { useEffect, useRef, useState, KeyboardEvent } from "react";
 
 
 export function DropLink({ href, children, dropData, className, ...props }: DropLinkProps) {
-    const [dropFlag, setDropFlag] = useState(false);
-    // const dropRef = useRef<HTMLUListElement>(null);
-    // const wrapperRef = useRef<HTMLUListElement>(null);
-    // wrapperRef.current?.addEventListener('blur', () => {
-    //     console.log('onblur');
-    //     setDropFlag(false);
-    // });
-    // useEffect(() => {
-    //     if (dropFlag)
-    //         dropRef.current?.tabIndex(1);
-    // }, [dropFlag]);
+    const wrapperRef = useRef(null);
 
-    // const hoverHandle = () => {
-    //     setDropFlag(true);
-    // }
-    // const unhoverHandle = () => {
-    //     setDropFlag(false);
-    // }
-    // const keyHandle = (e: KeyboardEvent<HTMLAnchorElement>) => {
-    //     console.log(e.key);
-
-    //     if (e.key === "Tab") {
-    //         if (dropRef.current) {
-    //             dropRef.current.querySelector('a')?.focus();
-    //         }
-    //         // dropRef.current?.firstChild?.focus();
-    //     }
-    // }
 
     return (
         <ul
-            className={cn(styles.wrapper, { [styles.open]: dropFlag })}
-        // ref={wrapperRef}
-        // onBlurCapture={() => setDropFlag(!dropFlag)}
+            ref={wrapperRef}
+            className={styles.wrapper}
+            {...props}
         >
             <li
-                className={cn(styles.link, styles.first)}
+                className={styles.main_item}
             >
                 <Link
                     href={href}
-                    // onMouseEnter={hoverHandle}
-                    // onMouseLeave={unhoverHandle}
-                    // onFocus={hoverHandle}
-                    // onBlur={unhoverHandle}
-                    {...props}
+                    className={cn(styles.link, styles.main_link)}
+                    onClick={(e) => {
+                        e.currentTarget.blur();
+                    }}
                 >
                     {children}
-                </Link>
-                {!!dropData &&
-                    <button
-                        className={styles.arrow_btn}
-                        onClick={() => setDropFlag(!dropFlag)}
-                    // onKeyDown={(e: KeyboardEvent<HTMLAnchorElement>) => keyHandle(e)}
+                    <svg
+                        className={styles.arrow}
+                        width="13"
+                        height="9"
+                        viewBox="0 0 13 9"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
                     >
-                        <svg
-                            className={cn({ [styles.arrow_flip]: dropFlag })}
-                            width="13"
-                            height="9"
-                            viewBox="0 0 13 9"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path d="M11.5 2L6.5 7L1.5 2" stroke="black" strokeWidth="3" strokeLinecap="round"
-                                strokeLinejoin="round" />
-                        </svg>
-                    </button >
-                }
+                        <path d="M11.5 2L6.5 7L1.5 2" stroke="black" strokeWidth="3" strokeLinecap="round"
+                            strokeLinejoin="round" />
+                    </svg>
+                </Link>
+
+
             </li>
-            {
-                !!dropData &&
-                <ul className={styles.dropMenu}>
-                    {dropData.map(item => {
-                        return (
-                            <li
-                                key={`drop-item-${item.href}`}
-                                className={cn(styles.link, styles.dropItem)}
+            <ul className={styles.dropMenu}>
+                {dropData?.map(item => {
+                    return (
+                        <li
+                            key={`drop-item-${item.href}`}
+                            className={cn(styles.dropItem)}
+                        >
+                            <Link
+                                href={item.href}
+                                className={cn(styles.link, styles.first_drop_item)}
+                                onClick={(e) => {
+                                    e.currentTarget.blur();
+                                }}
                             >
-                                <Link
-                                    href={item.href}
-                                // tabIndex={1}
-                                // onFocus={hoverHandle}
-                                >
-                                    {item.text}
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ul>
-            }
+                                {item.text}
+                            </Link>
+                            <ul className={styles.sideDropMenu}>
+                                {item.dropData.map(item => {
+                                    return (
+                                        <li
+                                            key={`side-drop-item${item.href}`}
+                                        >
+                                            <Link
+                                                href={item.href}
+                                                onClick={(e) => {
+                                                    e.currentTarget.blur();
+                                                }}
+                                            >
+                                                {item.text}
+                                            </Link>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </li>
+                    )
+                })}
+            </ul>
         </ul>
     )
 }

@@ -4,13 +4,13 @@ import { Url } from "url";
 export interface DropData {
     text: string,
     href: string,
-    dropData?: {
+    dropData: {
         text: string,
         href: string
     }[],
 }
 
-export interface DropLinkProps extends HTMLAttributes<HTMLAnchorElement> {
+export interface DropLinkProps extends HTMLAttributes<HTMLUListElement> {
     href: string,
     children?: ReactNode,
     dropData?: DropData[]
