@@ -1,26 +1,28 @@
 export interface ICategory {
     id: number
-    attributes: ICatAttributes
-}
-
-export interface ICatAttributes {
     title: string
     seoTitle: string
     createdAt: string
     updatedAt: string
     publishedAt: string
-    tools: {
-        data: ITool[]
-    }
+    tools: ITool[]
     image: IImage
 }
 
+// export interface ICatAttributes {
+//     title: string
+//     seoTitle: string
+//     createdAt: string
+//     updatedAt: string
+//     publishedAt: string
+//     tools: {
+//         data: ITool[]
+//     }
+//     image: IImage
+// }
+
 export interface ITool {
     id: number,
-    attributes: IToolAttributes
-}
-
-export interface IToolAttributes {
     createdAt: string
     updatedAt: string
     publishedAt: string
@@ -40,6 +42,27 @@ export interface IToolAttributes {
     }
     image: IImage
 }
+
+// export interface IToolAttributes {
+//     createdAt: string
+//     updatedAt: string
+//     publishedAt: string
+//     title: string
+//     pricelist: string
+//     seoTitle: string
+//     category: {
+//         data: {
+//             id: number,
+//             attributes: {
+//                 title: string
+//                 createdAt: string
+//                 updatedAt: string
+//                 publishedAt: string
+//             }
+//         }
+//     }
+//     image: IImage
+// }
 
 export interface IImage {
     data: {
@@ -69,25 +92,23 @@ export interface IImageAttributes {
 
 export interface IContacts {
     id: number,
-    attributes: {
-        email: string,
-        phoneNumber: string,
-        createdAt: string,
-        updatedAt: string,
-        publishedAt: string,
-    }
+    email: string,
+    phoneNumber: string,
+    createdAt: string,
+    updatedAt: string,
+    publishedAt: string,
 }
 
-export interface ISlide {
-    id: number,
-    attributes: {
-        link: string,
-        title: string,
-        text: string,
-        textColor: string,
-        image: {
-            url: string,
-            alt: string
-        }
-    }
-}
+// export interface ISlide {
+//     id: number,
+//     attributes: {
+//         link: string,
+//         title: string,
+//         text: string,
+//         textColor: string,
+//         image: {
+//             url: string,
+//             alt: string
+//         }
+//     }
+// }

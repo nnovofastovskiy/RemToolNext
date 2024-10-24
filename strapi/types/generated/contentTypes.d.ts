@@ -500,17 +500,17 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   info: {
     singularName: 'category';
     pluralName: 'categories';
-    displayName: 'Category';
+    displayName: 'category';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    title: Schema.Attribute.String & Schema.Attribute.Unique;
-    tools: Schema.Attribute.Relation<'oneToMany', 'api::tool.tool'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images'>;
     seoTitle: Schema.Attribute.String;
+    tools: Schema.Attribute.Relation<'oneToMany', 'api::tool.tool'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -527,52 +527,22 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiContactsContacts extends Struct.SingleTypeSchema {
-  collectionName: 'contact';
-  info: {
-    singularName: 'contacts';
-    pluralName: 'contact';
-    displayName: 'Contacts';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    email: Schema.Attribute.String;
-    phoneNumber: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::contacts.contacts'
-    > &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiToolTool extends Struct.CollectionTypeSchema {
   collectionName: 'tools';
   info: {
     singularName: 'tool';
     pluralName: 'tools';
-    displayName: 'Tool';
+    displayName: 'tool';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
-    title: Schema.Attribute.String & Schema.Attribute.Unique;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images'>;
-    pricelist: Schema.Attribute.RichText;
-    seoTitle: Schema.Attribute.String;
+    pricelist: Schema.Attribute.Blocks;
+    category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -969,7 +939,6 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::category.category': ApiCategoryCategory;
-      'api::contacts.contacts': ApiContactsContacts;
       'api::tool.tool': ApiToolTool;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;

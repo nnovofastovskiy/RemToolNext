@@ -1,6 +1,6 @@
 import styles from './page.module.scss';
 import { MainSwiper } from '@/components/MainSwiper/MainSwiper';
-import { getSlides } from '@/api/getData';
+// import { getSlides } from '@/api/getData';
 import { BrandsSwiper } from '@/components/BrandsSwiper/BrandsSwiper';
 import { WeRepairBlock } from '@/components/WeRepairBlock/WeRepairBlock';
 import Image from 'next/image';
@@ -15,7 +15,7 @@ import Image from 'next/image';
 // }
 
 export default async function Home() {
-  const slides = await getSlides();
+  // const slides = await getSlides();
   // const categories = await getCategories();
   // const data = await fetch('https://fakestoreapi.com/products');
   // const categories = await data.json();

@@ -4,7 +4,7 @@
   "info": {
     "singularName": "tool",
     "pluralName": "tools",
-    "displayName": "Tool",
+    "displayName": "tool",
     "description": ""
   },
   "options": {
@@ -12,15 +12,9 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "category": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::category.category",
-      "inversedBy": "tools"
-    },
     "title": {
       "type": "string",
-      "unique": true
+      "required": true
     },
     "image": {
       "type": "media",
@@ -31,10 +25,12 @@
       ]
     },
     "pricelist": {
-      "type": "richtext"
+      "type": "blocks"
     },
-    "seoTitle": {
-      "type": "string"
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
     }
   }
 }

@@ -28,7 +28,7 @@ export const Footer = ({ categories, contacts }: FooterProps) => {
                 </div>
                 <div className={styles.footer__nav}>
                     {categories.map(cat => (
-                        <Link key={`footer-cat-${cat.id}`} href={`/tools/${cat.id}`}>{cat.attributes.title}</Link>
+                        <Link key={`footer-cat-${cat.id}`} href={`/tools/${cat.id}`}>{cat.title}</Link>
                     ))}
                     {/* <Link {[routerLink] = "['tools', 'benzo']"}>Бензоинструмент</Link>
                     <Link {[routerLink] = "['tools', 'welding']"}>Сварочные аппараты</Link>
@@ -39,8 +39,8 @@ export const Footer = ({ categories, contacts }: FooterProps) => {
                     <Link {[routerLink] = "['tools', 'heatgun']"} > Тепловые пушки</Link > */}
                 </div >
                 <div className={styles.footer__contacts}>
-                    <a href={`tel: ${contacts.attributes.phoneNumber}`}>{contacts.attributes.phoneNumber}</a>
-                    <a href={`mailto: ${contacts.attributes.email}`}>{contacts.attributes.email}</a>
+                    <a href={`tel: ${contacts.phoneNumber}`}>{contacts.phoneNumber}</a>
+                    <a href={`mailto: ${contacts.email}`}>{contacts.email}</a>
                     <a target="_blank" href="https://yandex.ru/maps/-/CCUEb2QElD">Наш адрес: г.Москва, МГСА №256</a>
                     <div className={styles.contacts__hours}>
                         <div>
