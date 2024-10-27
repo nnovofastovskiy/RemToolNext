@@ -1,4 +1,4 @@
-import { ICategory, IContacts, ISlide, ITool } from "@/helpers/api.interfaces"
+import { ICategory, IContacts, ITool } from "@/helpers/api.interfaces"
 
 export const getAllCategories = async (): Promise<ICategory[]> => {
     const headers = new Headers();
@@ -52,36 +52,36 @@ export const getContacts = async (): Promise<IContacts> => {
     return res.data;
 }
 
-export const getSlides = async (): Promise<ISlide[]> => {
-    const data = await fetch('http://127.0.0.1:1337/api/slides?populate=image', { method: "GET" });
-    const res = await data.json();
-    // console.log(res.data);
+// export const getSlides = async (): Promise<ISlide[]> => {
+//     const data = await fetch('http://127.0.0.1:1337/api/slides?populate=image', { method: "GET" });
+//     const res = await data.json();
+//     // console.log(res.data);
 
-    // const slides: ISlide[] = []
+//     // const slides: ISlide[] = []
 
-    const slides: ISlide[] = res.data.map((slide: any) => {
-        // console.log(slide);
+//     const slides: ISlide[] = res.data.map((slide: any) => {
+//         // console.log(slide);
 
-        return {
-            id: slide.id,
-            attributes: {
-                link: slide.attributes.link,
-                title: slide.attributes.title,
-                text: slide.attributes.text,
-                textColor: slide.attributes.textColor,
-                image: {
-                    url: slide.attributes.image.data.attributes.url,
-                    alt: slide.attributes.image.data.attributes.alternativeText,
-                    // url: 'esrgserg',
-                    // alt: 'sergserg'
-                }
-            }
-        }
-    })
-    // console.log('getSlides');
+//         return {
+//             id: slide.id,
+//             attributes: {
+//                 link: slide.attributes.link,
+//                 title: slide.attributes.title,
+//                 text: slide.attributes.text,
+//                 textColor: slide.attributes.textColor,
+//                 image: {
+//                     url: slide.attributes.image.data.attributes.url,
+//                     alt: slide.attributes.image.data.attributes.alternativeText,
+//                     // url: 'esrgserg',
+//                     // alt: 'sergserg'
+//                 }
+//             }
+//         }
+//     })
+//     // console.log('getSlides');
 
-    return slides;
-}
+//     return slides;
+// }
 
 export const getTool = async (toolId: number): Promise<ITool> => {
     // const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/tools/' + String(toolId) + '?populate=*', { method: "GET" });

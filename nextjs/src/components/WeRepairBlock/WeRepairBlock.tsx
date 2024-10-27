@@ -25,14 +25,14 @@ export async function WeRepairBlock({ className }: WeRepairBlockProps) {
                         <h4
                             className={styles.title}
                         >
-                            {cat.attributes.title}
+                            {cat.title}
                         </h4>
                         {/* <pre>
-                            {JSON.stringify(cat.attributes.image.data.attributes.url, null, 4)}
+                            {JSON.stringify(cat.image.data.url, null, 4)}
                         </pre> */}
                         <Image
-                            src={process.env.NEXT_PUBLIC_BACK_DOMAIN + cat.attributes.image.data.attributes.url}
-                            alt={cat.attributes.image.data.attributes.alternativeText || ''}
+                            src={process.env.NEXT_PUBLIC_BACK_DOMAIN + cat.image.data.url}
+                            alt={cat.image.data.attributes.alternativeText || ''}
                             // width={cat.attributes.image.data.attributes.width}
                             // height={cat.attributes.image.data.attributes.height}
                             className={styles.image}

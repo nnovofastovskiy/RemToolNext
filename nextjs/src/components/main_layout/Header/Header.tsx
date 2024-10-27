@@ -16,14 +16,14 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
     const [dropData, setDropData] = useState<DropData[]>();
     useEffect(() => {
         const dropData: DropData[] = categories.map(cat => {
-            const dropData = cat.attributes.tools.data.map(tool => {
+            const dropData = cat.tools.map(tool => {
                 return {
-                    text: tool.attributes.title,
+                    text: tool.title,
                     href: `/tools/${cat.id}/${tool.id}`,
                 }
             });
             return {
-                text: cat.attributes.title,
+                text: cat.title,
                 href: `/tools/${cat.id}`,
                 dropData: dropData
             }
@@ -75,14 +75,14 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
                         <Search />
                     </li>
                     <li className={styles.header__phone}>
-                        <Link href={`tel: ${contacts.attributes.phoneNumber}`}>
+                        <Link href={`tel: ${contacts.phoneNumber}`}>
                             <Image
                                 src="/phone-icon.svg"
                                 alt=""
                                 width="26"
                                 height="26"
                             />
-                            {contacts.attributes.phoneNumber}
+                            {contacts.phoneNumber}
                         </Link>
                     </li>
                 </ul>
