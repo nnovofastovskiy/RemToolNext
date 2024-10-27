@@ -7,6 +7,7 @@ import cn from "classnames";
 
 export async function WeRepairBlock({ className }: WeRepairBlockProps) {
     const categories = await getAllCategories();
+    console.log(categories);
 
     return (
         <div
@@ -18,8 +19,8 @@ export async function WeRepairBlock({ className }: WeRepairBlockProps) {
             {categories.map(cat => {
                 return (
                     <Link
-                        key={`WeRepairCat-${cat.id}`}
-                        href={`/tools/${cat.id}`}
+                        key={`WeRepairCat-${cat.documentId}`}
+                        href={`/tools/${cat.documentId}`}
                         className={styles.link}
                     >
                         <h4
@@ -31,8 +32,8 @@ export async function WeRepairBlock({ className }: WeRepairBlockProps) {
                             {JSON.stringify(cat.image.data.url, null, 4)}
                         </pre> */}
                         <Image
-                            src={process.env.NEXT_PUBLIC_BACK_DOMAIN + cat.image.data.url}
-                            alt={cat.image.data.attributes.alternativeText || ''}
+                            src={process.env.NEXT_PUBLIC_BACK_DOMAIN + cat.image.url}
+                            alt={cat.image.alternativeText || ''}
                             // width={cat.attributes.image.data.attributes.width}
                             // height={cat.attributes.image.data.attributes.height}
                             className={styles.image}

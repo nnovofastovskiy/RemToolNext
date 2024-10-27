@@ -1,7 +1,8 @@
 export interface ICategory {
     id: number
+    documentId: string
     title: string
-    seoTitle: string
+    seoTitle: any
     createdAt: string
     updatedAt: string
     publishedAt: string
@@ -23,6 +24,7 @@ export interface ICategory {
 
 export interface ITool {
     id: number,
+    documentId: string,
     createdAt: string
     updatedAt: string
     publishedAt: string
@@ -30,15 +32,13 @@ export interface ITool {
     pricelist: string
     seoTitle: string
     category: {
-        data: {
-            id: number,
-            attributes: {
-                title: string
-                createdAt: string
-                updatedAt: string
-                publishedAt: string
-            }
-        }
+        id: 2,
+        documentId: string,
+        title: string,
+        seoTitle: string | null,
+        createdAt: string,
+        updatedAt: string,
+        publishedAt: string
     }
     image: IImage
 }
@@ -65,30 +65,45 @@ export interface ITool {
 // }
 
 export interface IImage {
-    data: {
-        id: number,
-        attributes: IImageAttributes
-    }
-}
-
-export interface IImageAttributes {
+    id: number
+    documentId: string
     name: string
     alternativeText: string | null
-    caption: any
+    caption: string | null
     width: number
     height: number
-    formats: any
+    formats: unknown
     hash: string
     ext: string
     mime: string
     size: number
     url: string
-    previewUrl: any
+    previewUrl: string | null
     provider: string
-    provider_metadata: any
+    provider_metadata: string | null
     createdAt: string
     updatedAt: string
+    publishedAt: string
 }
+
+// export interface IImageAttributes {
+//     name: string
+//     alternativeText: string | null
+//     caption: any
+//     width: number
+//     height: number
+//     formats: any
+//     hash: string
+//     ext: string
+//     mime: string
+//     size: number
+//     url: string
+//     previewUrl: any
+//     provider: string
+//     provider_metadata: any
+//     createdAt: string
+//     updatedAt: string
+// }
 
 export interface IContacts {
     id: number,
