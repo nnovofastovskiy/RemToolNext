@@ -47,7 +47,7 @@ export const getAllToolsInCat = async (catId: number): Promise<ICategory> => {
 }
 
 export const getContacts = async (): Promise<IContacts> => {
-    const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/contacts', { method: "GET" });
+    const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/contact', { method: "GET" });
     const res = await data.json();
     return res.data;
 }
