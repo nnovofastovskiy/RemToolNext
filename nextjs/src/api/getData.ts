@@ -27,9 +27,9 @@ export const getCategory = async (catId: number): Promise<ICategory> => {
     }
 }
 
-export const getAllToolsInCat = async (catId: number): Promise<ICategory> => {
+export const getAllToolsInCat = async (catId: string): Promise<ICategory> => {
     // const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*', { method: "GET" });
-    const response = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate[tools][populate][0]=image', { method: "GET" })
+    const response = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + catId + '?populate[tools][populate][0]=image', { method: "GET" })
         .catch(e => { throw new Error("Что-то пошло не так") });
     const res = await response.json();
     if (response.status === 200) {
@@ -83,11 +83,11 @@ export const getContacts = async (): Promise<IContacts> => {
 //     return slides;
 // }
 
-export const getTool = async (toolId: number): Promise<ITool> => {
+export const getTool = async (toolId: string): Promise<ITool> => {
     // const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/tools/' + String(toolId) + '?populate=*', { method: "GET" });
     // const res = await data.json();
     // return res.data;
-    const response = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/tools/' + String(toolId) + '?populate=*', { method: "GET" })
+    const response = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/tools/' + toolId + '?populate=*', { method: "GET" })
         .catch(e => { throw new Error("Что-то пошло не так") });
     const res = await response.json();
     if (response.status === 200) {

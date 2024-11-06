@@ -42,13 +42,13 @@ type Props = {
 // }
 
 export default async function Category({ params }: { params: { 'cat-id': string } }) {
-    const catId = parseInt(params['cat-id']);
+    const catId = params['cat-id'];
     const category = await getAllToolsInCat(catId);
-    const tools = category.attributes.tools.data;
+    const tools = category.tools;
     return (
         <main>
             <h1 className={styles.title}>
-                {category.attributes.title}
+                {category.title}
             </h1>
             <section className={styles.tools}>
                 {tools.map(tool => {

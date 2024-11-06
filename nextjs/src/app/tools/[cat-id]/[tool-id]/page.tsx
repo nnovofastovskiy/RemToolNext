@@ -3,9 +3,9 @@ import styles from './page.module.scss';
 import Image from 'next/image';
 
 export default async function Tool({ params }: { params: { 'tool-id': string } }) {
-    const toolId = parseInt(params['tool-id']);
+    const toolId = params['tool-id'];
     const tool = await getTool(toolId);
-    const image = tool.attributes.image.data.attributes;
+    const image = tool.image;
     let imageWidth = image.width;
     let imageHeigth = image.height;
     const imageRatio = imageHeigth / imageWidth;
@@ -13,7 +13,7 @@ export default async function Tool({ params }: { params: { 'tool-id': string } }
         imageHeigth = 200;
         imageWidth = Math.floor(200 / imageRatio);
     }
-    const pricelist = tool.attributes.pricelist.split('\n').map(line => line.split(':').map(item => item.trim()));
+    const pricelist = tool.pricelist.split('\n').map(line => line.split(';').map(item => item.trim()));
     console.log(pricelist);
 
 
@@ -22,7 +22,7 @@ export default async function Tool({ params }: { params: { 'tool-id': string } }
     return (
         <main className={styles.wrapper}>
             <h2 className={styles.title}>
-                {tool.attributes.title}
+                {tool.title}
             </h2>
             <div
                 className={styles.image}

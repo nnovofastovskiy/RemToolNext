@@ -4,7 +4,6 @@ import Link from 'next/link';
 import styles from './Header.module.scss';
 import cn from 'classnames';
 import { useEffect, useRef, useState } from 'react';
-import { DropMenu } from '../DropMenu/DropMenu';
 import { getAllCategories } from '@/api/getData';
 import { HeaderProps } from './Header.props';
 import Image from 'next/image';
@@ -19,12 +18,12 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
             const dropData = cat.tools.map(tool => {
                 return {
                     text: tool.title,
-                    href: `/tools/${cat.id}/${tool.id}`,
+                    href: `/tools/${cat.documentId}/${tool.documentId}`,
                 }
             });
             return {
                 text: cat.title,
-                href: `/tools/${cat.id}`,
+                href: `/tools/${cat.documentId}`,
                 dropData: dropData
             }
         });
