@@ -1,4 +1,4 @@
-import { getCategory, getAllToolsInCat } from '@/api/getData';
+import {  getAllToolsInCat } from '@/api/getData';
 import styles from './page.module.scss';
 import { ToolCard } from '@/components/ToolCard/ToolCard';
 import router from 'next/router';

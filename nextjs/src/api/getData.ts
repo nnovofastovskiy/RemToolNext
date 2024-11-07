@@ -3,29 +3,29 @@ import { ICategory, IContacts, ITool } from "@/helpers/api.interfaces"
 export const getAllCategories = async (): Promise<ICategory[]> => {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories' + '?populate=*', { method: "GET" });
+    const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories' + '?populate=*&&sort[0]=createdAt', { method: "GET" });
     const res = await data.json();
     return res.data;
 }
 
-export const getCategory = async (catId: number): Promise<ICategory> => {
-    // const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*', { method: "GET" });
-    const response = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*', { method: "GET" })
-        .catch(e => { throw new Error("Что-то пошло не так") });
-    const res = await response.json();
-    if (response.status === 200) {
-        const data = res?.data;
-        if (data) {
-            return data;
-        } else {
-            throw new Error("Такой категории не существует");
-        }
-    } else if (response.status === 404) {
-        throw new Error("Такой категории не существует");
-    } else {
-        throw new Error("Что-то пошло не так");
-    }
-}
+// export const getCategory = async (catId: number): Promise<ICategory> => {
+//     // const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*', { method: "GET" });
+//     const response = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*', { method: "GET" })
+//         .catch(e => { throw new Error("Что-то пошло не так") });
+//     const res = await response.json();
+//     if (response.status === 200) {
+//         const data = res?.data;
+//         if (data) {
+//             return data;
+//         } else {
+//             throw new Error("Такой категории не существует");
+//         }
+//     } else if (response.status === 404) {
+//         throw new Error("Такой категории не существует");
+//     } else {
+//         throw new Error("Что-то пошло не так");
+//     }
+// }
 
 export const getAllToolsInCat = async (catId: string): Promise<ICategory> => {
     // const data = await fetch(process.env.NEXT_PUBLIC_BACK_DOMAIN + '/api/categories/' + String(catId) + '?populate=*', { method: "GET" });
