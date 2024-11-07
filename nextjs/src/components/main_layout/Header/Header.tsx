@@ -59,11 +59,11 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
                             Инструменты
                         </DropLink>
                     </li>
-                    <li
+                    {/* <li
                         className={styles["nav__item"]}
                     >
                         <Link className={styles.nav__link} href="/delivery">Доставка и оплата</Link>
-                    </li>
+                    </li> */}
                     <li
                         className={styles["nav__item"]}
                     >

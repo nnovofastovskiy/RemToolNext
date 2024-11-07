@@ -58,6 +58,17 @@ export function DropLink({ href, children, dropData, className, ...props }: Drop
                                 }}
                             >
                                 {item.text}
+                                <svg
+                                    className={styles.arrow}
+                                    width="13"
+                                    height="9"
+                                    viewBox="0 0 13 9"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path d="M11.5 2L6.5 7L1.5 2" stroke="black" strokeWidth="3" strokeLinecap="round"
+                                        strokeLinejoin="round" />
+                                </svg>
                             </Link>
                             <ul className={styles.sideDropMenu}>
                                 {item.dropData.map(item => {
@@ -67,6 +78,7 @@ export function DropLink({ href, children, dropData, className, ...props }: Drop
                                         >
                                             <Link
                                                 href={item.href}
+                                                className={cn(styles.link, styles.second_drop_item)}
                                                 onClick={(e) => {
                                                     e.currentTarget.blur();
                                                 }}
