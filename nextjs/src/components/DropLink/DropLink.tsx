@@ -28,8 +28,11 @@ export function DropLink({ href, children, dropData, className, ...props }: Drop
                     }}
                 >
                     {children}
+                </Link>
+                <div
+                    className={styles.arrow}
+                >
                     <svg
-                        className={styles.arrow}
                         width="13"
                         height="9"
                         viewBox="0 0 13 9"
@@ -39,7 +42,7 @@ export function DropLink({ href, children, dropData, className, ...props }: Drop
                         <path d="M11.5 2L6.5 7L1.5 2" stroke="black" strokeWidth="3" strokeLinecap="round"
                             strokeLinejoin="round" />
                     </svg>
-                </Link>
+                </div>
 
 
             </li>

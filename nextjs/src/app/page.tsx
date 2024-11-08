@@ -14,7 +14,7 @@ import Image from 'next/image';
 //   return await data.json();
 // }
 
-export default async function Home() {
+export default function Home() {
   // const slides = await getSlides();
   // const categories = await getCategories();
   // const data = await fetch('https://fakestoreapi.com/products');

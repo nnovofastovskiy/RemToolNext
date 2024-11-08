@@ -9,6 +9,9 @@
 
 .main_item {
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .main_link {
@@ -20,7 +23,7 @@
     z-index: 100;
 }
 
-.wrapper:hover .main_link > .arrow {
+.wrapper:hover .main_item>.arrow>svg {
     transform: rotate(180deg);
 }
 
@@ -29,10 +32,17 @@
     display: flex;
 }
 
-.main_link > .arrow {
-    background: none;
-    border: none;
-    margin-left: 12px;
+.arrow {
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark-grey-color);
+    border-radius: 6px;
+}
+
+.arrow svg {
     transition: transform 0.2s ease;
 }
 
@@ -44,12 +54,12 @@
 //     transform: rotate(180deg);
 // }
 
-.first_drop_item > .arrow {
+.first_drop_item>.arrow {
     transform: rotate(270deg);
     transition: transform 0.2s ease;
 }
 
-.dropItem:hover .first_drop_item > .arrow {
+.dropItem:hover .first_drop_item>.arrow {
     transform: rotate(90deg);
 }
 
