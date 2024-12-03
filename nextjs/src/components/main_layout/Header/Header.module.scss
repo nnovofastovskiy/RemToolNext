@@ -285,8 +285,8 @@
     max-height: 500px;
     box-sizing: border-box;
     display: flex;
-    align-items: start;
-    align-content: start;
+    align-items: flex-start;
+    align-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
     background: var(--grey-grad);

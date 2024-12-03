@@ -27,10 +27,10 @@
     transform: rotate(180deg);
 }
 
-.wrapper:hover .dropMenu,
-.wrapper:focus-within .dropMenu {
-    display: flex;
-}
+// .wrapper:hover .dropMenu,
+// .wrapper:focus-within .dropMenu {
+//     display: flex;
+// }
 
 .arrow {
     height: 20px;
@@ -54,21 +54,21 @@
 //     transform: rotate(180deg);
 // }
 
-.first_drop_item>.arrow {
+.dropItem>.arrow>svg {
     transform: rotate(270deg);
     transition: transform 0.2s ease;
 }
 
-.dropItem:hover .first_drop_item>.arrow {
+.dropItem:hover>.arrow>svg {
     transform: rotate(90deg);
 }
 
 .dropMenu {
     position: absolute;
-    width: 200px;
+    width: 240px;
     top: 60px;
     left: 0;
-    display: none;
+    // display: none;
     flex-direction: column;
     background: var(--grey-grad);
     line-height: 1.6rem;
@@ -78,14 +78,14 @@
 
 .dropItem {
     padding: 0 12px;
-}
-
-.first_drop_item {
     height: 36px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
 }
+
+.first_drop_item {}
 
 .second_drop_item {
     height: 36px;
@@ -97,7 +97,7 @@
     display: none;
     flex-direction: column;
     top: 0;
-    left: 200px;
+    left: 240px;
     min-height: 100%;
     background: var(--grey-grad);
     text-wrap: nowrap;
