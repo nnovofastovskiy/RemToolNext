@@ -2,24 +2,36 @@ import { getAllCategories, getTool } from '@/api/getData';
 import styles from './page.module.scss';
 import Image from 'next/image';
 
-export async function generateStaticParams() {
+type IParams = {
+    catId: string,
+    toolId: string
+}
+
+export async function generateStaticParams({
+    params: { catId }
+}: {
+    params: { catId: string }
+}) {
     const categories = await getAllCategories();
     categories.map(cat => cat.documentId);
-    const tools: string[] = [];
+    const tools: IParams[] = [];
     categories.forEach(cat => {
         // console.log(cat);
 
         cat.tools.forEach(tool => {
-            tools.push(tool.documentId);
+            tools.push({
+                catId: cat.documentId,
+                toolId: tool.documentId
+            });
         });
     });
 
-    // console.log("====================   toolIds = ", tools);
+    console.log("====================   toolIds = ", tools);
     return tools
 }
 
-export default async function Tool({ params }: { params: { 'tool-id': string } }) {
-    const toolId = params['tool-id'];
+export default async function Tool({ params }: { params: IParams }) {
+    const toolId = params.toolId;
     const tool = await getTool(toolId);
     const image = tool.image;
     let imageWidth = image.width;

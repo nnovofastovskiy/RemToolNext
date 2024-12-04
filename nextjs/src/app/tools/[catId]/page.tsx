@@ -8,13 +8,13 @@ import { ICategory } from '@/helpers/api.interfaces';
 
 export async function generateStaticParams() {
     const categories = await getAllCategories();
-    const catIds = categories.map(cat => cat.documentId);
-    // console.log("====================   catIds = ", catIds);
+    const catIds = categories.map(cat => ({ catId: cat.documentId }));
+    console.log("====================   catIds = ", catIds);
     return catIds;
 }
 
-export default async function Category({ params }: { params: { 'cat-id': string } }) {
-    const catId = params['cat-id'];
+export default async function Category({ params }: { params: { catId: string } }) {
+    const catId = params.catId;
     const category = await getAllToolsInCat(catId);
     const tools = category.tools;
     return (
