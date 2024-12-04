@@ -8,7 +8,9 @@ import { ICategory } from '@/helpers/api.interfaces';
 
 export async function generateStaticParams() {
     const categories = await getAllCategories();
-    return categories.map(cat => cat.documentId);
+    const catIds = categories.map(cat => cat.documentId);
+    // console.log("====================   catIds = ", catIds);
+    return catIds;
 }
 
 export default async function Category({ params }: { params: { 'cat-id': string } }) {

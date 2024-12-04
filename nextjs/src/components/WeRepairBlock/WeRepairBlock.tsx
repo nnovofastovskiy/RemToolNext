@@ -7,7 +7,7 @@ import cn from "classnames";
 
 export async function WeRepairBlock({ className }: WeRepairBlockProps) {
     const categories = await getAllCategories();
-    console.log(categories);
+    // console.log(categories);
 
     return (
         <div

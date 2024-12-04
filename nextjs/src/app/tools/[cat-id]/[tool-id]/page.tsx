@@ -1,6 +1,22 @@
-import { getTool } from '@/api/getData';
+import { getAllCategories, getTool } from '@/api/getData';
 import styles from './page.module.scss';
 import Image from 'next/image';
+
+export async function generateStaticParams() {
+    const categories = await getAllCategories();
+    categories.map(cat => cat.documentId);
+    const tools: string[] = [];
+    categories.forEach(cat => {
+        // console.log(cat);
+
+        cat.tools.forEach(tool => {
+            tools.push(tool.documentId);
+        });
+    });
+
+    // console.log("====================   toolIds = ", tools);
+    return tools
+}
 
 export default async function Tool({ params }: { params: { 'tool-id': string } }) {
     const toolId = params['tool-id'];
@@ -14,7 +30,7 @@ export default async function Tool({ params }: { params: { 'tool-id': string } }
         imageWidth = Math.floor(200 / imageRatio);
     }
     const pricelist = tool.pricelist.split('\n').map(line => line.split(';').map(item => item.trim()));
-    console.log(pricelist);
+    // console.log(pricelist);
 
 
     // const category = await getAllToolsInCat(catId);
