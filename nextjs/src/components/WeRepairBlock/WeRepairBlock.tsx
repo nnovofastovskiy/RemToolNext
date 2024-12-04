@@ -38,6 +38,10 @@ export async function WeRepairBlock({ className }: WeRepairBlockProps) {
                             // height={cat.attributes.image.data.attributes.height}
                             className={styles.image}
                             fill={true}
+                            sizes="max-width: 300px"
+                        // width={cat.image.width}
+                        // height={cat.image.height}
+
                         />
                     </Link>
                 )

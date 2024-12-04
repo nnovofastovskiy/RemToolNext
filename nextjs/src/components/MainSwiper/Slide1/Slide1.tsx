@@ -41,7 +41,10 @@ export const Slide1 = () => {
                 alt='Фото мастера поремонту инструмента'
                 width={802}
                 height={340}
-                objectFit='cover'
+                style={{
+                    objectFit: 'cover'
+                }}
+            // objectFit='cover'
 
             />
         </>

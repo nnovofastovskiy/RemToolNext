@@ -25,11 +25,11 @@ export default async function RootLayout({
     <html lang="ru">
       <body className={inter.className}>
         <Header
-          categories={categories}
-          contacts={contacts}
+        // categories={categories}
+        // contacts={contacts}
         />
         {children}
-        <Footer categories={categories} contacts={contacts} />
+        <Footer />
       </body>
     </html>
   )

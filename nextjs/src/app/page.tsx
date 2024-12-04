@@ -126,7 +126,7 @@ export default function Home() {
             <Image
               src="/fix_process.png"
               alt=""
-              width="508"
+              width="487"
               height="594"
             />
           </div>

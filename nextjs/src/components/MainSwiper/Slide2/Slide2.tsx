@@ -22,7 +22,10 @@ export const Slide2 = () => {
                 alt='Фото мастера поремонту инструмента'
                 width={802}
                 height={340}
-                objectFit='cover'
+                // objectFit='cover'
+                style={{
+                    objectFit: 'cover'
+                }}
             />
         </>
     );

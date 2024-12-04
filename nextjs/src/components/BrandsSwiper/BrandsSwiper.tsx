@@ -65,10 +65,13 @@ export const BrandsSwiper = ({ className, ...props }: BrandsSwiperProps) => {
                             <Image
                                 src={'/brands/' + slide}
                                 alt=''
-                                layout={'fill'}
-                                objectFit='contain'
-                            // width={100}
-                            // height={50}
+                                // layout={'fill'}
+                                // objectFit='contain'
+                                width={100}
+                                height={50}
+                                style={{
+                                    objectFit: 'contain'
+                                }}
                             >
 
                             </Image>

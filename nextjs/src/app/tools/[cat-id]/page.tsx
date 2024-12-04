@@ -1,4 +1,4 @@
-import {  getAllToolsInCat } from '@/api/getData';
+import { getAllCategories, getAllToolsInCat } from '@/api/getData';
 import styles from './page.module.scss';
 import { ToolCard } from '@/components/ToolCard/ToolCard';
 import router from 'next/router';
@@ -6,40 +6,10 @@ import router from 'next/router';
 import type { Metadata, ResolvingMetadata } from 'next'
 import { ICategory } from '@/helpers/api.interfaces';
 
-type Props = {
-    params: {
-        'cat-id': string
-    }
+export async function generateStaticParams() {
+    const categories = await getAllCategories();
+    return categories.map(cat => cat.documentId);
 }
-
-// export async function generateMetadata(
-//     { params }: Props,
-//     parent: ResolvingMetadata
-// ): Promise<Metadata> {
-//     // read route params
-//     const catId = parseInt(params['cat-id']);
-//     let category: ICategory;
-//     try {
-//         category = await getCategory(catId);
-//     } catch (error) {
-
-//     }
-//     console.log(category.attributes.image.data.attributes.url);
-
-
-//     // fetch data
-//     // const product = await fetch(`https://.../${id}`).then((res) => res.json())
-
-//     // // optionally access and extend (rather than replace) parent metadata
-//     // const previousImages = (await parent).openGraph?.images || []
-
-//     return {
-//         title: category.attributes.title,
-//         openGraph: {
-//             images: [process.env.NEXT_PUBLIC_BACK_DOMAIN + category.attributes.image.data.attributes.url],
-//         },
-//     }
-// }
 
 export default async function Category({ params }: { params: { 'cat-id': string } }) {
     const catId = params['cat-id'];

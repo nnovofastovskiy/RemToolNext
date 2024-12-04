@@ -1,34 +1,35 @@
-'use client'
-
 import Link from 'next/link';
 import styles from './Header.module.scss';
 import cn from 'classnames';
 import { useEffect, useRef, useState } from 'react';
-import { getAllCategories } from '@/api/getData';
+import { getAllCategories, getContacts } from '@/api/getData';
 import { HeaderProps } from './Header.props';
 import Image from 'next/image';
 import { Search } from '@/components/Search/Search';
 import { DropLink } from '@/components/DropLink/DropLink';
 import { DropData } from '@/components/DropLink/DropLink.props';
 
-export const Header = ({ categories, contacts }: HeaderProps) => {
-    const [dropData, setDropData] = useState<DropData[]>();
-    useEffect(() => {
-        const dropData: DropData[] = categories.map(cat => {
-            const dropData = cat.tools.map(tool => {
-                return {
-                    text: tool.title,
-                    href: `/tools/${cat.documentId}/${tool.documentId}`,
-                }
-            });
+
+export async function Header() {
+    const categories = await getAllCategories();
+    const contacts = await getContacts();
+    // const [dropData, setDropData] = useState<DropData[]>();
+    // useEffect(() => {
+    const dropData: DropData[] = categories.map(cat => {
+        const dropData = cat.tools.map(tool => {
             return {
-                text: cat.title,
-                href: `/tools/${cat.documentId}`,
-                dropData: dropData
+                text: tool.title,
+                href: `/tools/${cat.documentId}/${tool.documentId}`,
             }
         });
-        setDropData(dropData);
-    }, []);
+        return {
+            text: cat.title,
+            href: `/tools/${cat.documentId}`,
+            dropData: dropData
+        }
+    });
+    //     setDropData(dropData);
+    // }, []);
 
     return (
         <header className={styles.header}>
@@ -78,7 +79,7 @@ export const Header = ({ categories, contacts }: HeaderProps) => {
                             <Image
                                 src="/phone-icon.svg"
                                 alt=""
-                                width="26"
+                                width="28"
                                 height="26"
                             />
                             {contacts.phoneNumber}

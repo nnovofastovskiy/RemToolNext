@@ -1,13 +1,13 @@
-// 'use client'
-
 import styles from './Footer.module.scss';
 import cn from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FooterProps } from './Footer.props';
+import { getAllCategories, getContacts } from '@/api/getData';
 
-export const Footer = ({ categories, contacts }: FooterProps) => {
-
+export async function Footer() {
+    const categories = await getAllCategories();
+    const contacts = await getContacts();
 
     return (
         <footer className={styles.footer}>
@@ -28,7 +28,7 @@ export const Footer = ({ categories, contacts }: FooterProps) => {
                 </div>
                 <div className={styles.footer__nav}>
                     {categories.map(cat => (
-                        <Link key={`footer-cat-${cat.id}`} href={`/tools/${cat.id}`}>{cat.title}</Link>
+                        <Link key={`footer-cat-${cat.documentId}`} href={`/tools/${cat.documentId}`}>{cat.title}</Link>
                     ))}
                     {/* <Link {[routerLink] = "['tools', 'benzo']"}>Бензоинструмент</Link>
                     <Link {[routerLink] = "['tools', 'welding']"}>Сварочные аппараты</Link>
