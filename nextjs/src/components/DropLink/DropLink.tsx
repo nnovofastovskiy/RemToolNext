@@ -8,13 +8,23 @@ import { useEffect, useRef, useState, KeyboardEvent, HTMLInputTypeAttribute, Inp
 
 
 export function DropLink({ href, children, dropData, className, ...props }: DropLinkProps) {
-    // const wrapperRef = useRef(null);
-    // const [dropOpen, setDropOpen] = useState(false);
-    // const [sideOpenItem, setSideOpenItem] = useState<DropData | null>(null);
+    const sideDropRef = useRef<HTMLUListElement>(null);
+    const wrapperRef = useRef<HTMLUListElement>(null);
+    const mainDropInputRef = useRef<HTMLInputElement>(null);
+
+    const sideDropClickHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const sideDropChecks = sideDropRef.current?.querySelectorAll<HTMLInputElement>('input[type=checkbox]');
+        sideDropChecks?.forEach(checkbox => {
+            if (checkbox != e.target) {
+                checkbox.checked = false;
+            }
+        });
+    }
 
     return (
         <ul
             className={styles.wrapper}
+            ref={wrapperRef}
             {...props}
 
         >
@@ -28,15 +38,27 @@ export function DropLink({ href, children, dropData, className, ...props }: Drop
                     {children}
                 </Link>
                 <input
+                    ref={mainDropInputRef}
                     className={styles.mainDropInput}
                     type="checkbox"
                     name="main-drop"
                     id="main-drop"
-                    aria-label="Раскрыть меню"
+                    aria-label={`Раскрыть меню ${children}`}
+                    style={{
+                        position: 'absolute',
+                        clip: 'rect(0 0 0 0)',
+                        clipPath: 'inset(50%)',
+                        height: '1px',
+                        overflow: 'hidden',
+                        whiteSpace: 'nowrap',
+                        width: '1px'
+                    }}
                 />
                 <label
                     htmlFor="main-drop"
                     className={styles.arrow}
+                    role="checkbox"
+                    style={{ userSelect: 'none', position: 'relative' }}
                 >
                     <svg
                         width="13"
@@ -50,7 +72,7 @@ export function DropLink({ href, children, dropData, className, ...props }: Drop
                     </svg>
                 </label>
             </li>
-            <ul className={styles.dropMenu}>
+            <ul className={styles.dropMenu} ref={sideDropRef}>
                 {dropData?.map(item => {
                     return (
                         <li
@@ -60,23 +82,30 @@ export function DropLink({ href, children, dropData, className, ...props }: Drop
                             <Link
                                 href={item.href}
                                 className={cn(styles.link, styles.first_drop_item)}
+                                onClick={() => {
+                                    if (mainDropInputRef.current) {
+                                        mainDropInputRef.current.checked = false;
+                                    }
+                                }}
                             >
                                 {item.text}
                             </Link>
                             <input
-                                type="radio"
+                                type="checkbox"
                                 name="sideDropInput"
                                 id={`sideDropInput-${item.href}`}
                                 className={styles.sideDropInput}
-                            // onClick={(e: React.MouseEvent<HTMLInputElement>) => {
-                            //     e.preventDefault();
-                            //     console.log(e.target.checked);
-                            //     if (e.target.checked) {
-                            //         e.target.checked = false;
-                            //     } else {
-                            //         e.target.checked = true;
-                            //     }
-                            // }}
+                                onChange={(e) => sideDropClickHandle(e)}
+                                aria-label={`Раскрыть меню ${item.text}`}
+                                style={{
+                                    position: 'absolute',
+                                    clip: 'rect(0 0 0 0)',
+                                    clipPath: 'inset(50%)',
+                                    height: '1px',
+                                    overflow: 'hidden',
+                                    whiteSpace: 'nowrap',
+                                    width: '1px'
+                                }}
                             />
                             <label
                                 htmlFor={`sideDropInput-${item.href}`}
@@ -102,6 +131,11 @@ export function DropLink({ href, children, dropData, className, ...props }: Drop
                                             <Link
                                                 href={item.href}
                                                 className={cn(styles.link, styles.second_drop_item)}
+                                                onClick={() => {
+                                                    if (mainDropInputRef.current) {
+                                                        mainDropInputRef.current.checked = false;
+                                                    }
+                                                }}
                                             >
                                                 {item.text}
                                             </Link>

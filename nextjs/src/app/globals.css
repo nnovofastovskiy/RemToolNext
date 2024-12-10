@@ -39,6 +39,10 @@ body {
   margin-bottom: 30px;
 }
 
+a:hover {
+  color: var(--orange-color-hover);
+}
+
 @media (max-width: 575.98px) {}
 
 /* // Small devices (landscape phones, less than 768px) */

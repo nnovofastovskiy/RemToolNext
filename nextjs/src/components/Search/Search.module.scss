@@ -44,3 +44,18 @@
         outline: none;
     }
 }
+
+.search:focus-within .results {
+    display: flex;
+}
+
+.results {
+    display: none;
+    position: absolute;
+    padding: 12px;
+    z-index: 100;
+    background-color: var(--grey-color);
+    background: var(--grey-grad);
+    line-height: 1.6rem;
+    box-shadow: var(--shadow);
+}

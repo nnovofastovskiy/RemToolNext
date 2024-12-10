@@ -72,7 +72,10 @@ export async function Header() {
                     </li>
 
                     <li>
-                        <Search />
+                        <Search
+                            placeholder={'Найти инструмент'}
+                            dropData={dropData}
+                        />
                     </li>
                     <li className={styles.header__phone}>
                         <Link href={`tel: ${contacts.phoneNumber}`}>

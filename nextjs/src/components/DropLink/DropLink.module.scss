@@ -4,7 +4,6 @@
 
 .link:hover {
     color: var(--orange-color-hover);
-
 }
 
 .main_item {
@@ -23,12 +22,22 @@
     z-index: 100;
 }
 
-.wrapper:hover .main_item>.arrow>svg,
+@media (hover :hover) {
+    .wrapper:hover .dropMenu {
+        display: flex;
+    }
+
+    .wrapper:hover .main_item>.arrow>svg {
+        transform: rotate(180deg);
+    }
+}
+
+// .wrapper:hover .main_item>.arrow>svg,
 .mainDropInput:checked+.arrow>svg {
     transform: rotate(180deg);
 }
 
-.wrapper:hover .dropMenu,
+// .wrapper:hover .dropMenu,
 .wrapper:has(.mainDropInput:checked) .dropMenu {
     display: flex;
 }
@@ -57,7 +66,8 @@
     transition: transform 0.2s ease;
 }
 
-.dropItem:hover>.arrow>svg {
+// .dropItem:hover>.arrow>svg,
+.sideDropInput:checked+.arrow>svg {
     transform: rotate(90deg);
 }
 
@@ -101,7 +111,21 @@
     text-wrap: nowrap;
 }
 
-.dropItem:hover .sideDropMenu,
-.sideDropInput:checked .sideDropMenu {
+.sideDropInput:checked~.sideDropMenu {
     display: flex;
+}
+
+@media (hover :hover) {
+    .dropItem:hover .sideDropMenu {
+        display: flex;
+    }
+
+    .dropItem:hover>.arrow>svg {
+        transform: rotate(90deg);
+    }
+}
+
+.sideDropInput:focus-visible+.arrow {
+    outline: 1px dotted #212121;
+    outline: 5px auto -webkit-focus-ring-color;
 }
